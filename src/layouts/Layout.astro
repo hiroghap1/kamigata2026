@@ -8,8 +8,8 @@ interface Props {
 const { title,ogImage } = Astro.props;
 const { slug } = Astro.params;
 
-const baseTitle = '上方日本酒ワールド 2025 公式サイト';
-const baseDescription = '2025年4月19日20日 @湊町リバープレイス 美味しい日本酒だけでは、ものたりない。美味しい料理だけでは、もったいない。全国の日本酒愛に溢れる銘店が大阪に集結！ 銘酒と銘店が集まる上方日本酒ワールドが、装いも新たに大復活！';
+const baseTitle = '上方日本酒ワールド 2026 公式サイト';
+const baseDescription = '2026年3月21日 @湊町リバープレイス 美味しい日本酒だけでは、ものたりない。美味しい料理だけでは、もったいない。全国の日本酒愛に溢れる銘店が大阪に集結！ 銘酒と銘店が集まる上方日本酒ワールドが、装いも新たに大復活！';
 const defaultOgImage = 'https://kamigata-nihonshu.com/assets/images/ogp.jpg';
 
 const pageTitle = slug ? `${title} - ${baseTitle}` : baseTitle;
@@ -41,7 +41,7 @@ const GTMKeyNoScript= `https://www.googletagmanager.com/ns.html?id=${GTMKey}`;
 		<meta property="og:type" content="website">
 		<meta property="og:title" content={pageTitle}>
 		<meta property="og:description" content={description}>
-		<meta property="og:site_name" content="上方日本酒ワールド 2025 公式サイト">
+		<meta property="og:site_name" content="上方日本酒ワールド 2026 公式サイト">
 		<meta property="og:image" content={pageOgImage}>
 		<meta name="twitter:card" content="summary_large_image">
 		<link rel="icon" href="/favicon.png" type="image/png">
