@@ -1,0 +1,37 @@
+---
+
+---
+<dialog id="modal-cuisine-store" class="modal">
+  <div id="modal-cuisine-store-inner" class="modal__inner">
+  </div>
+</dialog>
+
+<style lang="scss">
+  .modal {
+    width: calc(100% - 2rem);
+    max-width: 630px;
+    padding: 0;
+    &::backdrop {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    &[open] {
+      animation: .6s fadeIn both;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      translate: 0 20px;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+  .modal__inner {
+    padding: 1em  1em .5em;
+    height: auto;
+  }
+
+</style>

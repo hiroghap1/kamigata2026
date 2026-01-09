@@ -1,0 +1,708 @@
+---
+import { readFile } from 'fs/promises';
+import { parse } from 'csv-parse/sync';
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import mainBg from '../assets/images/main-bg.jpg';
+import date1 from '../assets/images/date_1.svg';
+import date2 from '../assets/images/date_2.svg';
+import iconX from '../assets/images/x.png';
+import iconInstagram from '../assets/images/instagram.png';
+import iconFacebook from '../assets/images/facebook.png';
+import cuisineImageAonisai19 from '../assets/images/cuisine/aonisai19.jpg';
+import cuisineImageAonisai20 from '../assets/images/cuisine/aonisai20.jpg';
+import cuisineImageDonkan from '../assets/images/cuisine/donkan.jpg';
+import cuisineImageKajinoba from '../assets/images/cuisine/kajinoba.jpg';
+import cuisineImageKakehashi from '../assets/images/cuisine/kakehashi.jpg';
+import cuisineImageKawahara from '../assets/images/cuisine/kawahara.jpg';
+import cuisineImageKunpu from '../assets/images/cuisine/kunpu.jpg';
+import cuisineImageGaku from '../assets/images/cuisine/gaku.jpg';
+import cuisineImageMarukome from '../assets/images/cuisine/marukome.jpg';
+import cuisineImageSyuuroku from '../assets/images/cuisine/syuuroku.jpg';
+import cuisineImageFurusato from '../assets/images/cuisine/furusato.jpg';
+import cuisineImageMaebatake from '../assets/images/cuisine/maebatake.jpg';
+import cuisineImageFujimoto from '../assets/images/cuisine/fujimoto.jpg';
+import cuisineImageHokura19 from '../assets/images/cuisine/hokura19.jpg';
+import cuisineImageHokura20 from '../assets/images/cuisine/hokura20.jpg';
+import cuisineImageHakkodo from '../assets/images/cuisine/hakkodo.jpg';
+import cuisineImageIwatsuki from '../assets/images/cuisine/iwatsuki.jpg';
+import cuisineImageKussu from '../assets/images/cuisine/kussu.jpg';
+import cuisineImageNanakamado from '../assets/images/cuisine/nanakamado.jpg';
+import cuisineImageNakamuta from '../assets/images/cuisine/nakamuta.jpg';
+import cuisineImageNene from '../assets/images/cuisine/nene.jpg';
+import cuisineImageRitmicita from '../assets/images/cuisine/ritmicita.jpg';
+import cuisineImageSakabakan19 from '../assets/images/cuisine/sakabakan19.jpg';
+import cuisineImageSakabakan20 from '../assets/images/cuisine/sakabakan20.jpg';
+import cuisineImageSyoten from '../assets/images/cuisine/syoten.jpg';
+import cuisineImageUtsutsuyo from '../assets/images/cuisine/utsutsuyo.jpg';
+import cuisineImageWakka from '../assets/images/cuisine/wakka.jpg';
+import cuisineImageYashima from '../assets/images/cuisine/yashima.jpg';
+import cuisineImageYoneshige from '../assets/images/cuisine/yoneshige.jpg';
+import cuisineImageYuniyumo from '../assets/images/cuisine/yuniyumo.jpg';
+import cuisineImageYuya from '../assets/images/cuisine/yuya.jpg';
+import ModalCusine from '../components/ModalCusine.astro';
+
+import storeImageritmicita1 from '../assets/images/store/ritmicita1.jpg';
+import storeImagesakabakan1 from '../assets/images/store/sakabakan1.jpg';
+import storeImagesakabakan2 from '../assets/images/store/sakabakan2.jpg';
+import storeImageaonisai1 from '../assets/images/store/aonisai1.jpg';
+import storeImagedonkan1 from '../assets/images/store/donkan1.jpg';
+import storeImagedonkan2 from '../assets/images/store/donkan2.jpg';
+import storeImagefujimoto1 from '../assets/images/store/fujimoto1.jpg';
+import storeImagefurusato1 from '../assets/images/store/furusato1.jpg';
+import storeImagefurusato2 from '../assets/images/store/furusato2.jpg';
+import storeImagegaku1 from '../assets/images/store/gaku1.jpg';
+import storeImagegaku2 from '../assets/images/store/gaku2.jpg';
+import storeImagegaku3 from '../assets/images/store/gaku3.jpg';
+import storeImagehokura1 from '../assets/images/store/hokura1.jpg';
+import storeImagehokura2 from '../assets/images/store/hokura2.jpg';
+import storeImagekawahara1 from '../assets/images/store/kawahara1.jpg';
+import storeImagekawahara2 from '../assets/images/store/kawahara2.jpg';
+import storeImagekussu1 from '../assets/images/store/kussu1.jpg';
+import storeImagekussu2 from '../assets/images/store/kussu2.jpg';
+import storeImagekussu3 from '../assets/images/store/kussu3.jpg';
+import storeImagemaebatake1 from '../assets/images/store/maebatake1.jpg';
+import storeImagemaebatake2 from '../assets/images/store/maebatake2.jpg';
+import storeImagemaebatake3 from '../assets/images/store/maebatake3.jpg';
+import storeImagemaebatake4 from '../assets/images/store/maebatake4.jpg';
+import storeImagenakamuta1 from '../assets/images/store/nakamuta1.jpg';
+import storeImagenakamuta2 from '../assets/images/store/nakamuta2.jpg';
+import storeImagenanakamado1 from '../assets/images/store/nanakamado1.jpg';
+import storeImagenanakamado2 from '../assets/images/store/nanakamado2.jpg';
+import storeImagenanakamado3 from '../assets/images/store/nanakamado3.jpg';
+import storeImagenanakamado4 from '../assets/images/store/nanakamado4.jpg';
+import storeImagenanakamado5 from '../assets/images/store/nanakamado5.jpg';
+import storeImagenanakamado6 from '../assets/images/store/nanakamado6.jpg';
+import storeImagenene1 from '../assets/images/store/nene1.jpg';
+import storeImagenene2 from '../assets/images/store/nene2.jpg';
+import storeImagesyoten1 from '../assets/images/store/syoten1.jpg';
+import storeImagesyuuroku1 from '../assets/images/store/syuuroku1.jpg';
+import storeImageutsutsuyo1 from '../assets/images/store/utsutsuyo1.jpg';
+import storeImageutsutsuyo2 from '../assets/images/store/utsutsuyo2.jpg';
+import storeImagewakka1 from '../assets/images/store/wakka1.jpg';
+import storeImagewakka2 from '../assets/images/store/wakka2.jpg';
+import storeImageyashima1 from '../assets/images/store/yashima1.jpg';
+import storeImageyashima2 from '../assets/images/store/yashima2.jpg';
+import storeImageyoneshige1 from '../assets/images/store/yoneshige1.jpg';
+import storeImageyoneshige2 from '../assets/images/store/yoneshige2.jpg';
+import storeImageyoneshige3 from '../assets/images/store/yoneshige3.jpg';
+import storeImageyoneshige4 from '../assets/images/store/yoneshige4.jpg';
+import storeImageyuya1 from '../assets/images/store/yuya1.jpg';
+import storeImageyuya2 from '../assets/images/store/yuya2.jpg';
+import storeImageyuya3 from '../assets/images/store/yuya3.jpg';
+import storeImageaonisai2 from '../assets/images/store/aonisai2.jpg';
+import storeImageaonisai3 from '../assets/images/store/aonisai3.jpg';
+import storeImagefujimoto2 from '../assets/images/store/fujimoto2.jpg';
+
+// インデックスシグネチャを持つ型を定義
+interface CuisineImageMap {
+  [key: string]: ImageMetadata; // ImportedのAstro画像型
+}
+interface storeImageMap {
+  [key: string]: number;
+}
+interface CsvRecord {
+  slug: string,
+  title: string,
+  storeAddress: string,
+  representative: string,
+  tel: string,
+  participation: string,
+  storeDescription: string,
+  initiatives: string,
+  brewery19: string,
+  brewery20: string,
+  message: string,
+  storeX: string,
+  storeInstagram: string,
+  storeFacebook: string,
+  breweryName19: string,
+  breweryName20: string,
+  sakePref19: string,
+  sakePref20: string,
+  representativeBrand19: string,
+  representativeBrand20: string,
+  sakeAddress19: string,
+  sakeAddress20: string,
+  breweryMan19: string,
+  breweryMan20: string,
+  breweryDescription19: string,
+  breweryDescription20: string,
+  breweryThoughts19: string,
+  breweryThoughts20: string,
+  aboutRestaurants19: string,
+  aboutRestaurants20: string,
+  storeX19: string,
+  storeInstagram19: string,
+  storeFacebook19: string,
+  storeX20: string,
+  storeInstagram20: string,
+  storeFacebook20: string,
+  cuisine19: string,
+  cuisine20: string,
+  sakeName19: string,
+  sakeName20: string,
+  cuisinePrice19: number,
+  cuisinePrice20: number,
+  sakePrice19: number,
+  sakePrice20: number,
+  setPrice19: number,
+  setPrice20: number,
+  sakeTemp19: string,
+  sakeTemp20: string,
+  cuisineImage: string,
+}
+// cuisineImageMapを作成してslugsと画像をマッピング
+const cuisineImageMap: CuisineImageMap = {
+  'aonisai19': cuisineImageAonisai19,
+  'aonisai20': cuisineImageAonisai20,
+  'donkan': cuisineImageDonkan,
+  'kajinoba': cuisineImageKajinoba,
+  'kakehashi': cuisineImageKakehashi,
+  'kawahara': cuisineImageKawahara,
+  'kunpu': cuisineImageKunpu,
+  'gaku': cuisineImageGaku,
+  'marukome': cuisineImageMarukome,
+  'syuuroku': cuisineImageSyuuroku,
+  'furusato': cuisineImageFurusato,
+  'maebatake': cuisineImageMaebatake,
+  'nakamuta': cuisineImageNakamuta,
+  'fujimoto': cuisineImageFujimoto,
+  'hokura19': cuisineImageHokura19,
+  'hokura20': cuisineImageHokura20,
+  'hakkodo': cuisineImageHakkodo,
+  'iwatsuki': cuisineImageIwatsuki,
+  'kussu': cuisineImageKussu,
+  'nanakamado': cuisineImageNanakamado,
+  'nene': cuisineImageNene,
+  'ritmicita': cuisineImageRitmicita,
+  'sakabakan19': cuisineImageSakabakan19,
+  'sakabakan20': cuisineImageSakabakan20,
+  'syoten': cuisineImageSyoten,
+  'utsutsuyo': cuisineImageUtsutsuyo,
+  'wakka': cuisineImageWakka,
+  'yashima': cuisineImageYashima,
+  'yoneshige': cuisineImageYoneshige,
+  'yuniyumo': cuisineImageYuniyumo,
+  'yuya': cuisineImageYuya,
+};
+const storeImageComponentMap: Record<string, ImageMetadata[]> = {
+  ritmicita: [storeImageritmicita1],
+  sakabakan: [storeImagesakabakan1, storeImagesakabakan2],
+  aonisai: [storeImageaonisai1, storeImageaonisai2, storeImageaonisai3],
+  donkan: [storeImagedonkan1, storeImagedonkan2],
+  fujimoto: [storeImagefujimoto1, storeImagefujimoto2],
+  furusato: [storeImagefurusato1, storeImagefurusato2],
+  gaku: [storeImagegaku1, storeImagegaku2, storeImagegaku3],
+  hokura: [storeImagehokura1, storeImagehokura2],
+  kawahara: [storeImagekawahara1, storeImagekawahara2],
+  kussu: [storeImagekussu1, storeImagekussu2, storeImagekussu3],
+  maebatake: [storeImagemaebatake1, storeImagemaebatake2, storeImagemaebatake3, storeImagemaebatake4],
+  nakamuta: [storeImagenakamuta1, storeImagenakamuta2],
+  nanakamado: [storeImagenanakamado1, storeImagenanakamado2, storeImagenanakamado3, storeImagenanakamado4, storeImagenanakamado5, storeImagenanakamado6],
+  nene: [storeImagenene1, storeImagenene2],
+  syoten: [storeImagesyoten1],
+  syuuroku: [storeImagesyuuroku1],
+  utsutsuyo: [storeImageutsutsuyo1, storeImageutsutsuyo2],
+  wakka: [storeImagewakka1, storeImagewakka2],
+  yashima: [storeImageyashima1, storeImageyashima2],
+  yoneshige: [storeImageyoneshige1, storeImageyoneshige2, storeImageyoneshige3, storeImageyoneshige4],
+  yuya: [storeImageyuya1, storeImageyuya2, storeImageyuya3],
+};
+
+export async function getStaticPaths() {
+  // CSVファイルを読み込む
+  const data = await readFile('src/data/store.csv', 'utf-8');
+
+  // CSVをパースする（ヘッダー行をオブジェクトのキーとして使用）
+  const records = parse(data, {
+    columns: true,
+    skip_empty_lines: true
+  }) as CsvRecord[];
+
+  // console.log(records);
+
+  // 各レコードからパスを生成
+  return records.map(record => ({
+    params: { slug: record.slug }, // slugフィールドがCSVに必要
+    props: { record } // レコード全体をpropsとして渡す
+  }));
+}
+
+// 各ページのpropsとしてレコードを受け取る
+const { record } = Astro.props;
+
+const slug = record.slug;
+const participation = record.participation.split(',').map(Number);
+
+let cuisineImage19: ImageMetadata | undefined;
+let cuisineImage20: ImageMetadata | undefined;
+
+if(participation.length === 1) {
+  if(participation[0] === 19) {
+    cuisineImage19 = cuisineImageMap[slug];
+  } else {
+    cuisineImage20 = cuisineImageMap[slug];
+  }
+} else {
+  cuisineImage19 = cuisineImageMap[slug + '19'];
+  cuisineImage20 = cuisineImageMap[slug + '20'];
+}
+
+const storeImages = storeImageComponentMap[slug] || [];
+---
+<Layout title={record.title} ogImage="">
+  <div class="wrapper">
+    <div class="main-wrapper">
+      <Header />
+      <main class="main">
+        <div class="section-wrapper">
+          <div class="section">
+            <h1 class="section-title">{record.title}</h1>
+            <div class="participation">参加日：
+              <div class="participation__date">
+                {record.participation.includes("19") &&
+                        <Image src={date1} alt="4月19日（土）" class="participation__image"/>
+                }
+                {record.participation.includes("20") &&
+                        <Image src={date2} alt="4月20日（日）" class="participation__image" />
+                }
+              </div>
+            </div>
+            {record.participation.includes("19") &&
+                    <figure class="cuisine">
+                      <Image src={date1} alt="4月19日（土）" class="participation__image"/>
+                      {cuisineImage19 && <Image src={cuisineImage19} alt="" class="cuisine__image"/>}
+                      <figcaption>
+                        <dl>
+                          <div class="price price-food">
+                            <dt>{record.cuisine19}</dt>
+                            <dd>{record.cuisinePrice19}円</dd>
+                          </div>
+                          <div class="price price-sake">
+                            <dt>{record.sakeName19}
+                              {record.sakeTemp19.split(',').map(temp => (
+                                <span class="temp">{temp}</span>
+                              ))}</dt>
+                            <dd>{record.sakePrice19}円</dd>
+                          </div>
+                          {record.setPrice19 && <div class="price">
+                            <dt>セット</dt>
+                            <dd>{record.setPrice19}円</dd>
+                          </div>}
+                        </dl>
+                      </figcaption>
+                    </figure>
+            }
+            {record.participation.includes("20") &&
+                    <figure class="cuisine">
+                      <Image src={date2} alt="4月20日（日）" class="participation__image" />
+                      {cuisineImage20 && <Image src={cuisineImage20} alt="" class="cuisine__image" />}
+                      <figcaption>
+                        <dl>
+                          <div class="price price-food">
+                            <dt>{record.cuisine20}</dt>
+                            <dd>{record.cuisinePrice20}円</dd>
+                          </div>
+                          <div class="price price-sake">
+                            <dt>{record.sakeName20}
+                              {record.sakeTemp20.split(',').map(temp => (
+                                      <span class="temp">{temp}</span>
+                              ))}</dt>
+                            <dd>{record.sakePrice20}円</dd>
+                          </div>
+                          {record.setPrice20 && <div class="price">
+                            <dt>セット</dt>
+                            <dd>{record.setPrice20}円</dd>
+                          </div>}
+                        </dl>
+                      </figcaption>
+                    </figure>
+            }
+            <p class="store__description">{record.storeDescription}</p>
+          </div>
+          <section class="section">
+            <h2 class="section-title">料理や日本酒についての取り組み</h2>
+            <p>{record.initiatives}</p>
+          </section>
+          <section class="section">
+            <h2 class="section-title">お客様へ</h2>
+            <p>{record.message}</p>
+            <table>
+              <tr>
+                <th>店舗名</th><td>{record.title}</td>
+              </tr>
+              <tr>
+                <th>住所</th><td>{record.storeAddress}</td>
+              </tr>
+              <tr>
+                <th>電話番号</th><td>{record.tel}</td>
+              </tr>
+              <tr>
+                <th>SNS</th>
+                <td><div class="sns">
+                  {record.storeX &&
+                          <a href=`https://x.com/${record.storeX}` target="_blank"><Image src={iconX} alt="X"/></a>}
+                  {record.storeInstagram &&
+                          <a href=`https://www.instagram.com/${record.storeInstagram}` target="_blank"><Image src={iconInstagram} alt="Instagram"/></a>}
+                  {record.storeFacebook &&
+                          <a href=`https://www.facebook.com/${record.storeFacebook}` target="_blank"><Image src={iconFacebook} alt="Facebook"/></a>}
+                </div></td>
+              </tr>
+<tr>
+                <th>店舗写真</th>
+                <td>
+                  <div class="store__images">
+                    {storeImages.map((img) => (
+                            <Image src={img} alt="" class="cuisine__image" />
+                    ))}
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </section>
+          {record.participation.includes("19") &&
+                  <section class="section">
+                    <h2 class="section-title"><Image src={date1} alt="4月19日（土）" class="participation__image"/></h2>
+                    <h3>{record.breweryName19}（{record.sakePref19}）</h3>
+                    <p>{record.brewery19}</p>
+                    <h4>代表銘柄：{record.representativeBrand19}</h4>
+                    <table>
+                      <tr>
+                        <th>酒蔵名</th><td>{record.breweryName19}</td>
+                      </tr>
+                      <tr>
+                        <th>酒蔵説明</th><td>{record.breweryDescription19}</td>
+                      </tr>
+                      <tr>
+                        <th>酒造りの<br>想い</th><td>{record.breweryThoughts19}</td>
+                      </tr>
+                      <tr>
+                        <th>タッグを<br>組む飲食店<br>について</th><td>{record.aboutRestaurants19}</td>
+                      </tr>
+                      <tr>
+                        <th>住所</th><td>{record.sakeAddress19}</td>
+                      </tr>
+                      <tr>
+                        <th>SNS</th>
+                        <td><div class="sns">
+                        {record.storeX19 &&
+                        <a href=`https://x.com/${record.storeX19}` target="_blank"><Image src={iconX} alt="X"/></a>}
+                        {record.storeInstagram19 &&
+                        <a href=`https://www.instagram.com/${record.storeInstagram19}` target="_blank"><Image src={iconInstagram} alt="Instagram"/></a>}
+                        {record.storeFacebook19 &&
+                        <a href=`https://www.facebook.com/${record.storeFacebook19}` target="_blank"><Image src={iconFacebook} alt="Facebook"/></a>}
+                        </div></td>
+                      </tr>
+                    </table>
+                  </section>
+          }
+          {record.participation.includes("20") &&
+                  <section class="section">
+                    <h2 class="section-title"><Image src={date2} alt="4月20日（日）" class="participation__image"/></h2>
+                    <h3>{record.breweryName20}（{record.sakePref20}）</h3>
+                    <p>{record.brewery20}</p>
+                    <h4>代表銘柄：{record.representativeBrand20}</h4>
+                    <table>
+                      <tr>
+                        <th>酒蔵名</th><td>{record.breweryName20}</td>
+                      </tr>
+                      <tr>
+                        <th>酒蔵説明</th><td>{record.breweryDescription20}</td>
+                      </tr>
+                      <tr>
+                        <th>酒造りの<br>想い</th><td>{record.breweryThoughts20}</td>
+                      </tr>
+                      <tr>
+                        <th>タッグを<br>組む飲食店<br>について</th><td>{record.aboutRestaurants20}</td>
+                      </tr>
+                      <tr>
+                        <th>住所</th><td>{record.sakeAddress20}</td>
+                      </tr>
+                      <tr>
+                        <th>SNS</th>
+                        <td><div class="sns">
+                        {record.storeX20 &&
+                        <a href=`https://x.com/${record.storeX20}` target="_blank"><Image src={iconX} alt="X"/></a>}
+                        {record.storeInstagram20 &&
+                        <a href=`https://www.instagram.com/${record.storeInstagram20}` target="_blank"><Image src={iconInstagram} alt="Instagram"/></a>}
+                        {record.storeFacebook20 &&
+                        <a href=`https://www.facebook.com/${record.storeFacebook20}` target="_blank"><Image src={iconFacebook} alt="Facebook"/></a>}
+                        </div></td>
+                      </tr>
+                    </table>
+                  </section>
+          }
+      </div>
+      </main>
+      <footer class="footer">
+        <p class="footer__copy">©︎上方日本酒ワールド ©日本酒卍固め ©SAKAZUKIN</p>
+      </footer>
+    </div>
+    <div class="main__imageBox">
+      <img class="main__image" src={mainBg.src}>
+    </div>
+  </div>
+  <ModalCusine />
+</Layout>
+
+<style lang="scss">
+  .wrapper {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 1fr;
+  }
+  .main-wrapper {
+    width: 100%;
+    max-width: 480px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr fit-content(100px);
+  }
+  .main {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+  .section-wrapper {
+    position: relative;
+    z-index: 1;
+    background-color: white;
+    width: 100%;
+    padding: 1rem 1rem 2rem;
+    box-shadow: 0 -2px 2px rgba(0 0 0 /25%);
+    background: white url(/assets/images/paper-bg.jpg);
+  }
+  .footer {
+    padding-block: 1rem;
+    background-color: #fff;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .main__imageBox {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-areas: 'image';
+    grid-column: 1/2;
+    grid-row: 1/3;
+    z-index: -1;
+  }
+  .main__image {
+    grid-area: image;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: brightness 1s both;
+  }
+  @keyframes brightness {
+    0% {
+      filter: brightness(0);
+    }
+    100% {
+      filter: brightness(0.6);
+    }
+  }
+  .main {
+    display: grid;
+    place-items: center;
+  }
+  .footer__copy {
+    font-size: min(4vw, 1rem);
+  }
+  .section {
+    position: relative;
+    padding-block: 2rem;
+    &::after {
+      content: '';
+      display: block;
+      width: 300px;
+      height: 95px;
+      margin-inline: auto;
+      translate: 0 40%;
+      background: url(/assets/images/section-decoration.svg) no-repeat center/contain;
+    }
+  }
+  .section-title {
+    text-align: center;
+    &::before {
+      content: '';
+      display: block;
+      width: 77px;
+      height: 75px;
+      margin-inline: auto;
+      opacity: 0;
+      background: url(/assets/images/title-sakazukin.svg) no-repeat center/contain;
+      animation: title 1s both;
+    }
+  }
+  @keyframes title {
+    0% {
+      transform: scale(.9, 1.2) translateY(-100%);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.2, .8) translateY(15%);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1) translate(0);
+      opacity: 1;
+    }
+  }
+  .participation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  .participation__date {
+    display: grid;
+    gap: .5rem;
+  }
+  .participation__image {
+    width: 10rem;
+    vertical-align: bottom;
+    filter: drop-shadow(0 0 3px rgb(7, 116, 114));
+  }
+  .store__description {
+    margin-top: 4rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th,td {
+    line-height: 1.4;
+    padding: .25rem .5rem;
+    border: 1px solid #999;
+    background-color: rgba(255 255 255 / 70%);
+  }
+  th {
+    width: 6em;
+    padding: .25rem .25rem;
+    background-color: rgba(0 0 0 / 10%);
+  }
+  .sns {
+    display: flex;
+    gap: .5rem;
+    img {
+      width: 24px;
+      vertical-align: bottom;
+    }
+  }
+  .cuisine {
+    position: relative;
+    margin-top: 3rem;
+    .participation__image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      translate: -20px -10px;
+      z-index: 1;
+    }
+    &:not(:has(.cuisine__image)) {
+      padding-top: 10px;
+    }
+  }
+  .cuisine__image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    display: block;
+    filter: drop-shadow(0 0 3px rgb(7, 116, 114));
+    padding: 4px;
+    background-color: #fff;
+  }
+  .store__images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    .cuisine__image {
+      filter: none;
+    }
+  }
+  .price {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 3.5em;
+    gap: .5rem;
+    align-items: center;
+    font-size: 1.2rem;
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+    }
+    &.price-food::before {
+      left: -1.75em;
+      width: 1.5em;
+      height: 1.5em;
+      background: url(/assets/images/icon-food.svg) no-repeat center/contain;
+    }
+    &.price-sake::before {
+      left: -1.75em;
+      width: 1.5em;
+      height: 1.5em;
+      background: url(/assets/images/icon-sake.svg) no-repeat center/contain;
+    }
+    +.price {
+      margin-top: 1.8rem;
+      &::after {
+        top: -.9rem;
+        left: 0;
+        right: 0;
+        width: 50%;
+        height: 0;
+        margin-inline: auto;
+        border-top: 1px dashed #999;
+      }
+    }
+  }
+  dd {
+    margin: 0;
+    text-align: right;
+  }
+  dt {
+    line-height: 1.3;
+  }
+  .temp {
+    display: inline-block;
+    padding: .1rem .35rem;
+    border-radius: 4px;
+    font-size: .8rem;
+    background-color: rgba(255 255 255 / 70%);
+    margin-right: .25rem;
+    vertical-align: text-bottom;
+  }
+</style>
+
+<script>
+const cuisineImage = document.querySelectorAll('.cuisine__image');
+const modalCuisineStore = document.getElementById('modal-cuisine-store');
+const modalInner = document.getElementById('modal-cuisine-store-inner');
+
+cuisineImage.forEach((image) => {
+  image.addEventListener('click', () => {
+    modalInner!.innerHTML = `<img src="${image.src}" alt="">`;
+    modalCuisineStore!.showModal();
+  });
+});
+modalCuisineStore!.addEventListener('click', (event)=> {
+  if(event.target!.closest('#modal-consignment-store-inner') === null) {
+    modalCuisineStore!.close();
+  }
+});
+
+</script>

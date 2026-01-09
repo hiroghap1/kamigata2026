@@ -1,0 +1,59 @@
+---
+---
+<dialog id="modal-consignment-store" class="modal">
+  <div id="modal-consignment-store-inner" class="modal__inner">
+    <h3 id="modal-consignment-store-title" class="modal__title"></h3>
+    <p id="modal-consignment-store-address" class="modal__address"></p>
+    <p id="modal-consignment-store-tel" class="modal__tel"></p>
+    <iframe id="modal-consignment-store-map" width="600" height="450" class="googlemap" src=""></iframe>
+  </div>
+</dialog>
+
+<style lang="scss">
+    .modal {
+        width: calc(100% - 2rem);
+        max-width: 630px;
+        padding: 0;
+        &::backdrop {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    }
+    .modal__inner {
+        padding: 1em  1em .5em;
+        height: auto;
+    }
+    .modal__title {
+      margin-bottom: .5rem;
+    }
+    p {
+        margin: 0;
+    }
+    .modal__address {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      &::before {
+        content: '';
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        background: url(/assets/images/icon-map.svg) no-repeat center/contain;
+      }
+    }
+    .modal__tel {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      &::before {
+        content: '';
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        background: url(/assets/images/icon-tel.svg) no-repeat center/contain;
+      }
+    }
+    .googlemap {
+        display: block;
+        margin-top: 1rem;
+    }
+</style>

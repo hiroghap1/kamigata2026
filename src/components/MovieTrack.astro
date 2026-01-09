@@ -1,0 +1,49 @@
+---
+
+---
+<div class="splide">
+  <div class="splide__track">
+    <div class="splide__list">
+      <figure class="splide__slide">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/CL_R_O4B8no?si=gIzp3IMpY5D_YN_8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <figcaption>＃1 :イベント創設者の一人であり前運営の吉村さんにインタビュー</figcaption>
+      </figure>
+      <figure class="splide__slide">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/pZEJ8UpquCo?si=DMzoP9G16gIeKO6r" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <figcaption>＃2 :イベント創設者の一人であり前運営の大西さんにインタビュー</figcaption>
+      </figure>
+      <figure class="splide__slide">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/EWkcx05SZlk?si=KgNLiLQGX-Euw9rQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <figcaption>＃3 :イベント創設者の一人であり前運営の伊戸川さんにインタビュー</figcaption>
+      </figure>
+      <figure class="splide__slide">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/UffCrRfBdJk?si=cL-Pe2mozTWt0mdW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <figcaption>＃4 :最多8回連続出店のうつつよの藤井さんにインタビュー</figcaption>
+      </figure>
+    </div>
+  </div>
+</div>
+
+<script>
+  import Splide from "@splidejs/splide";
+  import '@splidejs/splide/css/skyblue';
+
+  const splides = document.querySelectorAll('.splide');
+  splides.forEach(splide => {
+    new Splide(splide, {
+      type: 'loop',
+    }).mount();
+  });
+</script>
+
+<style>
+iframe {
+  display: block;
+  }
+.splide__track {
+  max-width: 560px;
+  }
+.splide {
+  padding-bottom: 2rem;
+  }
+</style>

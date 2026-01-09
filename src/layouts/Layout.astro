@@ -1,0 +1,122 @@
+---
+import ProductOnly from '../components/ProductOnly.astro';
+interface Props {
+	title: string;
+	ogImage: string;
+}
+
+const { title,ogImage } = Astro.props;
+const { slug } = Astro.params;
+
+const baseTitle = '上方日本酒ワールド 2025 公式サイト';
+const baseDescription = '2025年4月19日20日 @湊町リバープレイス 美味しい日本酒だけでは、ものたりない。美味しい料理だけでは、もったいない。全国の日本酒愛に溢れる銘店が大阪に集結！ 銘酒と銘店が集まる上方日本酒ワールドが、装いも新たに大復活！';
+const defaultOgImage = 'https://kamigata-nihonshu.com/assets/images/ogp.jpg';
+
+const pageTitle = slug ? `${title} - ${baseTitle}` : baseTitle;
+const description = slug ? `${title}。${baseDescription}` : baseDescription;
+const pageOgImage = ogImage || defaultOgImage;
+
+const url = new URL(Astro.url.pathname, 'https://kamigata-nihonshu.com');
+
+const GTMKey = import.meta.env.PUBLIC_GTM_KEY;
+const GTMKeyNoScript= `https://www.googletagmanager.com/ns.html?id=${GTMKey}`;
+---
+<!doctype html>
+<html lang="ja">
+	<head>
+		<ProductOnly>
+			<!-- Google Tag Manager -->
+			<script define:vars={{GTMKey}}>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+					new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+				j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+				'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+			})(window,document,'script','dataLayer',GTMKey);</script>
+			<!-- End Google Tag Manager -->
+		</ProductOnly>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>{pageTitle}</title>
+		<meta name="description" content={description}>
+		<meta property="og:url" content="https://kamigata-nihonshu.com/">
+		<meta property="og:type" content="website">
+		<meta property="og:title" content={pageTitle}>
+		<meta property="og:description" content={description}>
+		<meta property="og:site_name" content="上方日本酒ワールド 2025 公式サイト">
+		<meta property="og:image" content={pageOgImage}>
+		<meta name="twitter:card" content="summary_large_image">
+		<link rel="icon" href="/favicon.png" type="image/png">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/yakuhanjp@4.1.1/dist/css/yakuhanjp.css">
+	</head>
+	<body>
+	<ProductOnly>
+		<noscript>
+			<iframe src={GTMKeyNoScript} height="0" width="0" style="display:none;visibility:hidden"></iframe>
+		</noscript>
+	</ProductOnly>
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	html {
+		scroll-behavior: smooth;
+	}
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		//height: 100%;
+			font-family: YakuHanJP, "Kosugi Maru", serif;
+			font-weight: 400;
+			font-style: normal;
+		color: #333;
+		line-height: 1.7;
+	}
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+	*, *::before, *::after {
+		box-sizing: border-box;
+	}
+	.googlemap {
+		width: 100%;
+		padding: 8px;
+		border: 1px solid #999;
+		background-color: #fff;
+	}
+	a {
+		color: #333;
+	}
+	.text-center {
+		text-align: center;
+	}
+	.text-left {
+		text-align: left;
+	}
+	iframe {
+		max-width: 100%;
+	}
+	.splide__pagination {
+		display: flex!important;
+	}
+	.instagram__item {
+		aspect-ratio: 1/1;
+		height: auto;
+		>img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+		}
+		>video {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+		}
+	}
+</style>

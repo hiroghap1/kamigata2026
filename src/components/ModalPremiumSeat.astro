@@ -1,0 +1,24 @@
+---
+import StepManual from "./StepManual.astro";
+---
+<dialog id="premiumSeatModal" class="modal">
+  <div id="premiumSeatModal-inner" class="modal__inner">
+    <StepManual />
+  </div>
+</dialog>
+
+
+
+<style>
+.modal {
+  padding: 0;
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  }
+.modal__inner {
+  padding: 1em  1em .5em;
+  height: auto;
+  // aspect-ratio: 16/9;
+  }
+</style>

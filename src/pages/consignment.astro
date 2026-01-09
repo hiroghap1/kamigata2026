@@ -1,0 +1,309 @@
+---
+import fs from 'fs/promises';
+import Papa from 'papaparse';
+
+import ModalConsignmentStore from '../components/ModalConsignmentStore.astro';
+import Layout from '../layouts/Layout.astro';
+import mainBg from '../assets/images/main-bg.jpg';
+import Header from '../components/Header.astro';
+
+import csvContent from '../data/data.csv?raw';
+const { data: csvData } = Papa.parse(csvContent, { header: true });
+
+// csvData の内容をコンソールに出力（デバッグ用）
+// console.log(csvData);
+
+// データを「地域」ごとにグループ化
+const groupedData = csvData.reduce((acc, row) => {
+  const region = row['地域'];
+  if (region) {
+    // 該当の地域がまだなければ初期化
+    if (!acc[region]) {
+      acc[region] = [];
+    }
+    acc[region].push(row);
+  }
+  return acc;
+}, {});
+
+// 指定の順番で出力したい「特定の区」のリスト
+const specificOrder = [
+  "北区",
+  "福島区",
+  "中央区",
+  "浪速区",
+  "西区",
+  "此花区",
+  "淀川区",
+  "都島区",
+  "天王寺区",
+  "阿倍野区"
+];
+
+// カスタムのソートキーを返す関数
+function getSortKey(region) {
+  // 指定順の区に該当する場合は、カテゴリ 0 としてインデックスをキーにする
+  if (specificOrder.includes(region)) {
+    return [0, specificOrder.indexOf(region)];
+  }
+  // 「区」で終わるもの（上記以外）はカテゴリ 1
+  if (region.endsWith("区")) {
+    return [1, region];
+  }
+  // 「市」で終わるものはカテゴリ 2
+  if (region.endsWith("市")) {
+    return [2, region];
+  }
+  // 「豊能郡」はカテゴリ 3
+  if (region === "豊能郡") {
+    return [3, region];
+  }
+  // それ以外はカテゴリ 4
+  return [4, region];
+}
+
+// groupedData のキー（地域名）を上記ルールでソートする
+const sortedRegions = Object.keys(groupedData).sort((a, b) => {
+  const [catA, keyA] = getSortKey(a);
+  const [catB, keyB] = getSortKey(b);
+  if (catA !== catB) {
+    return catA - catB;
+  }
+  // 同一カテゴリの場合は、数値の場合は数値比較、文字列の場合は localeCompare で比較
+  if (typeof keyA === "number" && typeof keyB === "number") {
+    return keyA - keyB;
+  }
+  return keyA.localeCompare(keyB, "ja");
+});
+---
+
+<Layout title="チケット購入可能店舗" ogImage="">
+  <div class="wrapper">
+    <div class="main-wrapper">
+      <Header />
+      <main class="main">
+        <div class="section-wrapper">
+          <section class="section">
+            <h1 class="section-title">チケット購入可能店舗</h1>
+            <p class="text-center">美味しい日本酒に出会えるお店はこちら！</p>
+
+            {sortedRegions.map(region => (
+                    <>
+                      <h2 class="region-title">{region}</h2>
+                      <ul class="consignment-store__list">
+                        {groupedData[region].map( row => (
+                                <li class="consignment-store__item">
+                                  <button type="button" class="consignment-store__button" data-storename={row['委託店舗名']} data-address={row['住所']} data-tel={row['電話番号']}>{row['委託店舗名']}</button>
+                                </li>
+                        ))}
+                      </ul>
+                    </>
+            ))}
+          </section>
+        </div>
+      </main>
+      <footer class="footer">
+        <p class="footer__copy">©︎上方日本酒ワールド ©日本酒卍固め ©SAKAZUKIN</p>
+      </footer>
+    </div>
+    <div class="main__imageBox">
+      <img class="main__image" src="assets/images/bg.jpg" alt="" width="1920" height="1280">
+      <img class="main__image" src={mainBg.src}>
+    </div>
+  </div>
+  <ModalConsignmentStore />
+</Layout>
+
+<style lang="scss">
+  .wrapper {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 1fr;
+  }
+  .main-wrapper {
+    width: 100%;
+    max-width: 480px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr fit-content(100px);
+  }
+  .main {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+  .main-visual {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: 100svh;
+    display: grid;
+    place-items: center;
+  }
+  .section-wrapper {
+    position: relative;
+    z-index: 1;
+    background-color: white;
+    width: 100%;
+    padding: 1rem 1rem 2rem;
+    box-shadow: 0 -2px 2px rgba(0 0 0 /25%);
+    background: white url(/assets/images/paper-bg.jpg);
+  }
+  .footer {
+    padding-block: 1rem;
+    background-color: #fff;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .main__imageBox {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-areas: 'image';
+    grid-column: 1/2;
+    grid-row: 1/3;
+    z-index: -1;
+  }
+  .main__image {
+    grid-area: image;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: brightness 1s both;
+  }
+  @keyframes brightness {
+    0% {
+      filter: brightness(0);
+    }
+    100% {
+      filter: brightness(0.6);
+    }
+  }
+  .main {
+    display: grid;
+    place-items: center;
+  }
+  .footer__copy {
+    font-size: min(4vw, 1rem);
+  }
+
+  .section-title {
+    text-align: center;
+    &::before {
+      content: '';
+      display: block;
+      width: 77px;
+      height: 75px;
+      margin-inline: auto;
+      opacity: 0;
+      background: url(/assets/images/title-sakazukin.svg) no-repeat center/contain;
+      animation: title 1s both;
+    }
+    }
+    @keyframes title {
+      0% {
+        transform: scale(.9, 1.2) translateY(-100%);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.2, .8) translateY(15%);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1) translate(0);
+        opacity: 1;
+      }
+    }
+  .button {
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    padding: .35rem 1rem .25rem;
+    background-color: #4d9940;
+    color: white;
+    width: fit-content;
+    margin: 0 auto .5rem;
+  }
+  .section--access {
+    p {
+      line-height: 1.4;
+      width: fit-content;
+      margin-inline: auto;
+    }
+    li {
+      line-height: 1.4;
+      margin-top: .3rem;
+      font-size: 14px;
+    }
+  }
+  .modal-open__button {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    color: white;
+    animation: fadeIn 1s both 1s;
+  }
+
+  .region-title {
+    margin-top: 2rem;
+    line-height: normal;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  .consignment-store__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 16px;
+    padding-left: 0;
+    list-style: none;
+  }
+  .consignment-store__button {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    padding: .5rem 1rem;
+    background: rgba(255 255 255/ 40%);
+    border: 0;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+  }
+  </style>
+<script>
+  const modalConsignmentStoreOpenButton = document.querySelectorAll('.consignment-store__button');
+  const modalConsignmentStore = document.getElementById('modal-consignment-store');
+  const modalConsignmentStoreTitle = document.getElementById('modal-consignment-store-title');
+  const modalConsignmentStoreAddress = document.getElementById('modal-consignment-store-address');
+  const modalConsignmentStoreTel = document.getElementById('modal-consignment-store-tel');
+  const modalConsignmentStoreMap = document.getElementById('modal-consignment-store-map');
+  modalConsignmentStoreOpenButton.forEach(button => {
+    button.addEventListener('click',(event)=> {
+      console.log(event.target);
+      const storeData = event.target;
+      modalConsignmentStoreTitle!.textContent = storeData!.dataset.storename;
+      modalConsignmentStoreAddress!.textContent = storeData!.dataset.address;
+      modalConsignmentStoreTel!.innerHTML = `<a href="tel:${storeData!.dataset.tel}">${storeData!.dataset.tel}</a>`;
+      modalConsignmentStoreMap!.src = `https://maps.google.co.jp/maps?output=embed&q=${storeData!.dataset.storename} ${storeData!.dataset.address}&z=16`;
+      modalConsignmentStore!.showModal();
+    });});
+  modalConsignmentStore!.addEventListener('click', (event)=> {
+    if(event.target!.closest('#modal-consignment-store-inner') === null) {
+      modalConsignmentStoreMap!.src = '';
+      modalConsignmentStore!.close();
+    }
+  });
+</script>
