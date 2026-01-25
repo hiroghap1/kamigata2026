@@ -6,6 +6,7 @@
     <p id="modal-consignment-store-address" class="modal__address"></p>
     <p id="modal-consignment-store-tel" class="modal__tel"></p>
     <iframe id="modal-consignment-store-map" width="600" height="450" class="googlemap" src=""></iframe>
+    <a id="modal-consignment-store-link" href="" target="_blank" class="modal__link">Googleマップで見る</a>
   </div>
 </dialog>
 
@@ -55,5 +56,16 @@
     .googlemap {
         display: block;
         margin-top: 1rem;
+    }
+    .modal__link {
+        display: block;
+        width: fit-content;
+        margin: 1rem auto 0;
+        padding: 0.5rem 1rem;
+        background-color: #4d9940;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 14px;
     }
 </style>

@@ -1,80 +1,52 @@
 ---
-import fs from 'fs/promises';
-import Papa from 'papaparse';
+import Papa from "papaparse";
 
-import ModalConsignmentStore from '../components/ModalConsignmentStore.astro';
-import Layout from '../layouts/Layout.astro';
-import mainBg from '../assets/images/main-bg.jpg';
-import Header from '../components/Header.astro';
+import Layout from "../layouts/Layout.astro";
+import mainBg from "../assets/images/main-bg.jpg";
+import Header from "../components/Header.astro";
 
-import csvContent from '../data/data.csv?raw';
+import csvContent from "../data/consignment_2026.csv?raw";
 const { data: csvData } = Papa.parse(csvContent, { header: true });
 
-// csvData の内容をコンソールに出力（デバッグ用）
-// console.log(csvData);
-
-// データを「地域」ごとにグループ化
-const groupedData = csvData.reduce((acc, row) => {
-  const region = row['地域'];
-  if (region) {
-    // 該当の地域がまだなければ初期化
-    if (!acc[region]) {
-      acc[region] = [];
-    }
-    acc[region].push(row);
-  }
-  return acc;
-}, {});
-
-// 指定の順番で出力したい「特定の区」のリスト
-const specificOrder = [
-  "北区",
-  "福島区",
-  "中央区",
-  "浪速区",
-  "西区",
-  "此花区",
-  "淀川区",
-  "都島区",
-  "天王寺区",
-  "阿倍野区"
+const areaOrder = [
+  "大阪市北区",
+  "大阪市中央区",
+  "大阪市西区",
+  "大阪市浪速区",
+  "大阪市淀川区",
+  "大阪市福島区",
+  "大阪市天王寺区",
+  "大阪市住之江区",
+  "吹田市",
+  "堺市",
+  "兵庫県",
+  "京都府",
 ];
 
-// カスタムのソートキーを返す関数
-function getSortKey(region) {
-  // 指定順の区に該当する場合は、カテゴリ 0 としてインデックスをキーにする
-  if (specificOrder.includes(region)) {
-    return [0, specificOrder.indexOf(region)];
-  }
-  // 「区」で終わるもの（上記以外）はカテゴリ 1
-  if (region.endsWith("区")) {
-    return [1, region];
-  }
-  // 「市」で終わるものはカテゴリ 2
-  if (region.endsWith("市")) {
-    return [2, region];
-  }
-  // 「豊能郡」はカテゴリ 3
-  if (region === "豊能郡") {
-    return [3, region];
-  }
-  // それ以外はカテゴリ 4
-  return [4, region];
+function getSortKey(area) {
+  const index = areaOrder.indexOf(area);
+  return [index === -1 ? 999 : index, area];
 }
 
-// groupedData のキー（地域名）を上記ルールでソートする
-const sortedRegions = Object.keys(groupedData).sort((a, b) => {
-  const [catA, keyA] = getSortKey(a);
-  const [catB, keyB] = getSortKey(b);
-  if (catA !== catB) {
-    return catA - catB;
-  }
-  // 同一カテゴリの場合は、数値の場合は数値比較、文字列の場合は localeCompare で比較
-  if (typeof keyA === "number" && typeof keyB === "number") {
+// データをソートする
+const sortedData = csvData
+  .filter((row) => row["店舗名"])
+  .sort((a, b) => {
+    const [keyA, nameA] = getSortKey(a["エリア"]);
+    const [keyB, nameB] = getSortKey(b["エリア"]);
+    if (keyA !== keyB) {
+      return keyA - keyB;
+    }
+    return a["店舗名"].localeCompare(b["店舗名"], "ja");
+  });
+
+const areas = [...new Set(sortedData.map((row) => row["エリア"]))].sort(
+  (a, b) => {
+    const [keyA] = getSortKey(a);
+    const [keyB] = getSortKey(b);
     return keyA - keyB;
-  }
-  return keyA.localeCompare(keyB, "ja");
-});
+  },
+);
 ---
 
 <Layout title="チケット購入可能店舗" ogImage="">
@@ -87,18 +59,66 @@ const sortedRegions = Object.keys(groupedData).sort((a, b) => {
             <h1 class="section-title">チケット購入可能店舗</h1>
             <p class="text-center">美味しい日本酒に出会えるお店はこちら！</p>
 
-            {sortedRegions.map(region => (
-                    <>
-                      <h2 class="region-title">{region}</h2>
-                      <ul class="consignment-store__list">
-                        {groupedData[region].map( row => (
-                                <li class="consignment-store__item">
-                                  <button type="button" class="consignment-store__button" data-storename={row['委託店舗名']} data-address={row['住所']} data-tel={row['電話番号']}>{row['委託店舗名']}</button>
-                                </li>
-                        ))}
-                      </ul>
-                    </>
-            ))}
+            <div class="filter-wrapper">
+              <button
+                type="button"
+                class="filter-button active"
+                data-filter="all">すべて</button
+              >
+              {
+                areas.map((area) => (
+                  <button
+                    type="button"
+                    class="filter-button"
+                    data-filter={area}
+                  >
+                    {area}
+                  </button>
+                ))
+              }
+            </div>
+
+            <div id="store-list" class="consignment-store__grid">
+              {
+                sortedData.map((row) => (
+                  <div class="store-card" data-area={row["エリア"]}>
+                    <h3 class="store-card__name">{row["店舗名"]}</h3>
+                    <div class="store-card__info">
+                      <p class="store-card__address">
+                        <span>
+                          <span>{row["住所1"]}</span>
+                          {row["住所2"] && <span>{row["住所2"]}</span>}
+                        </span>
+                      </p>
+                      {row["電話番号"] && row["電話番号"] !== "不明" && (
+                        <p class="store-card__tel">
+                          <a href={`tel:${row["電話番号"]}`}>
+                            {row["電話番号"]}
+                          </a>
+                        </p>
+                      )}
+                    </div>
+                    {row["GoogleマップURL"] && (
+                      <div class="store-card__links">
+                        <a
+                          href={`tel:${row["電話番号"]}`}
+                          class="store-card__link--tel"
+                        >
+                          電話
+                        </a>
+                        <a
+                          href={row["GoogleマップURL"]}
+                          target="_blank"
+                          class="store-card__link--map"
+                        >
+                          マップ
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                ))
+              }
+            </div>
           </section>
         </div>
       </main>
@@ -107,11 +127,16 @@ const sortedRegions = Object.keys(groupedData).sort((a, b) => {
       </footer>
     </div>
     <div class="main__imageBox">
-      <img class="main__image" src="assets/images/bg.jpg" alt="" width="1920" height="1280">
-      <img class="main__image" src={mainBg.src}>
+      <img
+        class="main__image"
+        src="/assets/images/bg.jpg"
+        alt=""
+        width="1920"
+        height="1280"
+      />
+      <img class="main__image" src={mainBg.src} />
     </div>
   </div>
-  <ModalConsignmentStore />
 </Layout>
 
 <style lang="scss">
@@ -134,16 +159,6 @@ const sortedRegions = Object.keys(groupedData).sort((a, b) => {
     grid-column: 1/2;
     grid-row: 1/2;
   }
-  .main-visual {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    height: 100svh;
-    display: grid;
-    place-items: center;
-  }
   .section-wrapper {
     position: relative;
     z-index: 1;
@@ -165,7 +180,7 @@ const sortedRegions = Object.keys(groupedData).sort((a, b) => {
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-areas: 'image';
+    grid-template-areas: "image";
     grid-column: 1/2;
     grid-row: 1/3;
     z-index: -1;
@@ -175,7 +190,7 @@ const sortedRegions = Object.keys(groupedData).sort((a, b) => {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    animation: brightness 1s both;
+    // animation: brightness 1s both;
   }
   @keyframes brightness {
     0% {
@@ -196,114 +211,181 @@ const sortedRegions = Object.keys(groupedData).sort((a, b) => {
   .section-title {
     text-align: center;
     &::before {
-      content: '';
+      content: "";
       display: block;
       width: 77px;
       height: 75px;
       margin-inline: auto;
       opacity: 0;
-      background: url(/assets/images/title-sakazukin.svg) no-repeat center/contain;
+      background: url(/assets/images/title-sakazukin.svg) no-repeat
+        center/contain;
       animation: title 1s both;
     }
-    }
-    @keyframes title {
-      0% {
-        transform: scale(.9, 1.2) translateY(-100%);
-        opacity: 0;
-      }
-      50% {
-        transform: scale(1.2, .8) translateY(15%);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(1) translate(0);
-        opacity: 1;
-      }
-    }
-  .button {
-    display: flex;
-    text-decoration: none;
-    align-items: center;
-    justify-content: center;
-    padding: .35rem 1rem .25rem;
-    background-color: #4d9940;
-    color: white;
-    width: fit-content;
-    margin: 0 auto .5rem;
   }
-  .section--access {
-    p {
-      line-height: 1.4;
-      width: fit-content;
-      margin-inline: auto;
+  @keyframes title {
+    0% {
+      transform: scale(0.9, 1.2) translateY(-100%);
+      opacity: 0;
     }
-    li {
-      line-height: 1.4;
-      margin-top: .3rem;
-      font-size: 14px;
+    50% {
+      transform: scale(1.2, 0.8) translateY(15%);
+      opacity: 1;
     }
-  }
-  .modal-open__button {
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    border: 0;
-    cursor: pointer;
-    color: white;
-    animation: fadeIn 1s both 1s;
+    100% {
+      transform: scale(1) translate(0);
+      opacity: 1;
+    }
   }
 
-  .region-title {
-    margin-top: 2rem;
-    line-height: normal;
-    font-size: 1.3rem;
-    font-weight: bold;
-    text-align: center;
+  .filter-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-block: 2rem;
   }
-  .consignment-store__list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px 16px;
-    padding-left: 0;
-    list-style: none;
-  }
-  .consignment-store__button {
-    display: block;
-    width: 100%;
-    height: 100%;
-    text-align: left;
-    padding: .5rem 1rem;
-    background: rgba(255 255 255/ 40%);
-    border: 0;
+
+  .filter-button {
+    padding: 0.4rem 1rem;
+    border: 1px solid #4d9940;
+    background: white;
+    color: #4d9940;
+    border-radius: 20px;
     cursor: pointer;
     font-size: 14px;
-    color: #333;
-  }
-  </style>
-<script>
-  const modalConsignmentStoreOpenButton = document.querySelectorAll('.consignment-store__button');
-  const modalConsignmentStore = document.getElementById('modal-consignment-store');
-  const modalConsignmentStoreTitle = document.getElementById('modal-consignment-store-title');
-  const modalConsignmentStoreAddress = document.getElementById('modal-consignment-store-address');
-  const modalConsignmentStoreTel = document.getElementById('modal-consignment-store-tel');
-  const modalConsignmentStoreMap = document.getElementById('modal-consignment-store-map');
-  modalConsignmentStoreOpenButton.forEach(button => {
-    button.addEventListener('click',(event)=> {
-      console.log(event.target);
-      const storeData = event.target;
-      modalConsignmentStoreTitle!.textContent = storeData!.dataset.storename;
-      modalConsignmentStoreAddress!.textContent = storeData!.dataset.address;
-      modalConsignmentStoreTel!.innerHTML = `<a href="tel:${storeData!.dataset.tel}">${storeData!.dataset.tel}</a>`;
-      modalConsignmentStoreMap!.src = `https://maps.google.co.jp/maps?output=embed&q=${storeData!.dataset.storename} ${storeData!.dataset.address}&z=16`;
-      modalConsignmentStore!.showModal();
-    });});
-  modalConsignmentStore!.addEventListener('click', (event)=> {
-    if(event.target!.closest('#modal-consignment-store-inner') === null) {
-      modalConsignmentStoreMap!.src = '';
-      modalConsignmentStore!.close();
+    transition: all 0.2s;
+
+    &:hover {
+      background: rgba(77, 153, 64, 0.1);
     }
+
+    &.active {
+      background: #4d9940;
+      color: white;
+    }
+  }
+
+  .consignment-store__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem 0.5rem;
+    margin-top: 1rem;
+
+    @media (min-width: 480px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .store-card {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid #ddd;
+    padding: 1rem 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    &[style*="display: none"] {
+      // フィルタリング時のアニメーション用
+    }
+  }
+
+  .store-card__name {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.3;
+  }
+
+  .store-card__info {
+    font-size: 13px;
+    color: #666;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .store-card__address {
+    margin: 0;
+    display: flex;
+    &::before {
+      content: "📍";
+      margin-right: 4px;
+      display: inline-block;
+    }
+  }
+
+  .store-card__tel {
+    margin: 0;
+    a {
+      color: inherit;
+      text-decoration: none;
+      &::before {
+        content: "📞";
+        margin-right: 4px;
+        display: inline-block;
+      }
+    }
+  }
+  .store-card__links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-top: auto;
+  }
+  [class*="store-card__link--"] {
+    display: block;
+    text-align: center;
+    padding: 0.5rem;
+    border: 1px solid #4d9940;
+    background: #4d9940;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    border-radius: 4px;
+    transition: all 0.3s ease-out;
+
+    &:hover {
+      background: #3d7a33;
+    }
+  }
+  .store-card__link--tel {
+    background-color: transparent;
+    color: #4d9940;
+    &:hover {
+      background: rgba(77, 153, 64, 0.1);
+    }
+  }
+  .store-card__link--map {
+  }
+</style>
+
+<script>
+  const filterButtons = document.querySelectorAll(".filter-button");
+  const storeCards = document.querySelectorAll(".store-card");
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      // ボタンの活性状態を切り替え
+      filterButtons.forEach((btn) => btn.classList.remove("active"));
+      button.classList.add("active");
+
+      const filter = (button as HTMLButtonElement).dataset.filter;
+
+      storeCards.forEach((card) => {
+        const area = (card as HTMLElement).dataset.area;
+        if (filter === "all" || area === filter) {
+          (card as HTMLElement).style.display = "flex";
+        } else {
+          (card as HTMLElement).style.display = "none";
+        }
+      });
+    });
   });
 </script>

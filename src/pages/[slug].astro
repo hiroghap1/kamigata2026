@@ -5,8 +5,8 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import mainBg from '../assets/images/main-bg.jpg';
-import date1 from '../assets/images/date_1.svg';
-import date2 from '../assets/images/date_2.svg';
+import date1 from '../assets/images/date.svg';
+import date2 from '../assets/images/date.svg';
 import iconX from '../assets/images/x.png';
 import iconInstagram from '../assets/images/instagram.png';
 import iconFacebook from '../assets/images/facebook.png';
@@ -263,16 +263,16 @@ const storeImages = storeImageComponentMap[slug] || [];
             <div class="participation">参加日：
               <div class="participation__date">
                 {record.participation.includes("19") &&
-                        <Image src={date1} alt="4月19日（土）" class="participation__image"/>
+                        <Image src={date1} alt="3月21日（土）" class="participation__image"/>
                 }
                 {record.participation.includes("20") &&
-                        <Image src={date2} alt="4月20日（日）" class="participation__image" />
+                        <Image src={date2} alt="3月21日（土）" class="participation__image" />
                 }
               </div>
             </div>
             {record.participation.includes("19") &&
                     <figure class="cuisine">
-                      <Image src={date1} alt="4月19日（土）" class="participation__image"/>
+                      <Image src={date1} alt="3月21日（土）" class="participation__image"/>
                       {cuisineImage19 && <Image src={cuisineImage19} alt="" class="cuisine__image"/>}
                       <figcaption>
                         <dl>
@@ -297,7 +297,7 @@ const storeImages = storeImageComponentMap[slug] || [];
             }
             {record.participation.includes("20") &&
                     <figure class="cuisine">
-                      <Image src={date2} alt="4月20日（日）" class="participation__image" />
+                      <Image src={date2} alt="3月21日（土）" class="participation__image" />
                       {cuisineImage20 && <Image src={cuisineImage20} alt="" class="cuisine__image" />}
                       <figcaption>
                         <dl>
@@ -364,7 +364,7 @@ const storeImages = storeImageComponentMap[slug] || [];
           </section>
           {record.participation.includes("19") &&
                   <section class="section">
-                    <h2 class="section-title"><Image src={date1} alt="4月19日（土）" class="participation__image"/></h2>
+                    <h2 class="section-title"><Image src={date1} alt="3月21日（土）" class="participation__image"/></h2>
                     <h3>{record.breweryName19}（{record.sakePref19}）</h3>
                     <p>{record.brewery19}</p>
                     <h4>代表銘柄：{record.representativeBrand19}</h4>
@@ -400,7 +400,7 @@ const storeImages = storeImageComponentMap[slug] || [];
           }
           {record.participation.includes("20") &&
                   <section class="section">
-                    <h2 class="section-title"><Image src={date2} alt="4月20日（日）" class="participation__image"/></h2>
+                    <h2 class="section-title"><Image src={date2} alt="3月21日（土）" class="participation__image"/></h2>
                     <h3>{record.breweryName20}（{record.sakePref20}）</h3>
                     <p>{record.brewery20}</p>
                     <h4>代表銘柄：{record.representativeBrand20}</h4>
