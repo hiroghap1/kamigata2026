@@ -1,0 +1,82 @@
+---
+---
+<div class="floating-menu">
+  <a href="/" class="menu-item menu-item--home">
+    <img src="/assets/images/icon-home.png" alt="" width="24" height="24">
+    <span class="menu-item__label">ホーム</span>
+  </a>
+  <a href="https://eplus.jp/sf/detail/4454100001-P0030001" target="_blank" class="menu-item menu-item--online">
+    <img src="/assets/images/eplus-logo.png" alt="イープラス" width="24" height="24">
+    <span class="menu-item__label">オンライン<br>チケット</span>
+  </a>
+  <a href="/consignment" class="menu-item menu-item--advance">
+    <img src="/assets/images/icon-ticket.png" alt="" width="24" height="24">
+    <span class="menu-item__label">前売り<br>チケット</span>
+  </a>
+</div>
+
+<style lang="scss">
+  .floating-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: calc(480px - 2rem);
+    margin-inline: auto;
+    display: flex;
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+    height: 60px;
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    transition: background-color 0.2s, opacity 0.2s;
+    height: 100%;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &--home {
+      flex: 1;
+      flex-direction: column;
+      background-color: #333;
+    }
+
+    &--online {
+      flex: 2;
+      color: #e95098; // eplus red
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      > img {
+        width: 40px;
+      }
+    }
+
+    &--advance {
+      flex: 2;
+      background-color: #4d9940; // theme green
+    }
+  }
+
+  .menu-item__label {
+    text-align: center;
+    line-height: 1.3;
+    padding-inline: 8px;
+    word-break: keep-all;
+  }
+
+  // Adjust body padding to not hide content behind the menu
+  :global(body) {
+    padding-bottom: 60px;
+  }
+</style>
