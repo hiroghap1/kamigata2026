@@ -6,47 +6,27 @@ import mainBg from "../assets/images/main-bg.jpg";
 import Header from "../components/Header.astro";
 
 import csvContent from "../data/consignment_2026.csv?raw";
-const { data: csvData } = Papa.parse(csvContent, { header: true });
+import areaMasterContent from "../data/area_master.csv?raw";
 
-const areaOrder = [
-  "大阪市北区",
-  "大阪市中央区",
-  "大阪市西区",
-  "大阪市浪速区",
-  "大阪市淀川区",
-  "大阪市福島区",
-  "大阪市天王寺区",
-  "大阪市住之江区",
-  "吹田市",
-  "堺市",
-  "兵庫県",
-  "京都府",
-];
+const { data: csvData } = Papa.parse(csvContent, { header: true });
+const { data: areaMasterData } = Papa.parse(areaMasterContent, { header: true });
+
+// エリアマスターからエリアの順序を取得
+const areaOrder = areaMasterData.map(row => row['エリア名']).filter(Boolean);
 
 function getSortKey(area) {
   const index = areaOrder.indexOf(area);
   return [index === -1 ? 999 : index, area];
 }
 
-// データをソートする
+// データを店舗名の50音順でソートする
 const sortedData = csvData
   .filter((row) => row["店舗名"])
-  .sort((a, b) => {
-    const [keyA, nameA] = getSortKey(a["エリア"]);
-    const [keyB, nameB] = getSortKey(b["エリア"]);
-    if (keyA !== keyB) {
-      return keyA - keyB;
-    }
-    return a["店舗名"].localeCompare(b["店舗名"], "ja");
-  });
+  .sort((a, b) => a["店舗名"].localeCompare(b["店舗名"], "ja"));
 
-const areas = [...new Set(sortedData.map((row) => row["エリア"]))].sort(
-  (a, b) => {
-    const [keyA] = getSortKey(a);
-    const [keyB] = getSortKey(b);
-    return keyA - keyB;
-  },
-);
+// 実際にデータが存在するエリアのみを、エリアマスターの順序で抽出
+const existingAreas = [...new Set(sortedData.map((row) => row["エリア"]))];
+const areas = areaOrder.filter(area => existingAreas.includes(area));
 ---
 
 <Layout title="チケット購入可能店舗" ogImage="">
