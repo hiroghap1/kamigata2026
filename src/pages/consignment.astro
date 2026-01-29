@@ -52,7 +52,7 @@ const areas = areaOrder.filter(area => existingAreas.includes(area));
                     class="filter-button"
                     data-filter={area}
                   >
-                    {area}
+                    {area.replace('大阪市', '')}
                   </button>
                 ))
               }
