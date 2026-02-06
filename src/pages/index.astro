@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
 import mainBg from "../assets/images/main-bg.jpg";
 import date1 from "../assets/images/date_1.svg";
 import date2 from "../assets/images/date_2.svg";
@@ -9,125 +10,30 @@ import { onPageLoad } from "astro/dist/transitions/events";
 import premiumSeat from "../assets/images/premium-seat.jpg";
 import premiumSeat2024 from "../assets/images/premium-seat2024.jpg";
 import instagram from "../assets/images/instagram.png";
+import iconX from "../assets/images/x.png";
+import iconInstagram from "../assets/images/instagram.png";
 
 import ModalMovie from "../components/ModalMovie.astro";
 import MovieTrack from "../components/MovieTrack.astro";
 import { getAppIcon } from "astro/dist/runtime/client/dev-toolbar/toolbar";
 import ModalConsignmentStore from "../components/ModalConsignmentStore.astro";
 import Navigation from "../components/Navigation.astro";
+import News from "../components/News.astro";
 import { before } from "node:test";
 import { positionAt } from "astro/dist/core/errors";
 import { webcrypto } from "node:crypto";
 import { placements } from "astro/dist/runtime/client/dev-toolbar/ui-library/window";
 import ModalPremiumSeat from "../components/ModalPremiumSeat.astro";
 
-const consignmentStore = [
-	{
-		storeName: "杉本商店",
-		address: "大阪市都島区内代町3-2-4",
-		tel: "06-6951-2145",
-	},
-	{
-		storeName: "十徳日本酒販売所",
-		address:
-			"大阪府吹田市千里山西4丁目39 千里山ロイヤルマンション二番街 B1F",
-		tel: "06-6310-2211",
-	},
-	{
-		storeName: "酒蔵なかやま",
-		address: "大阪市北区本庄東2丁目15-2",
-		tel: "06-6371-0145",
-	},
-	{
-		storeName: "いなごや酒店",
-		address: "大阪府豊中市新千里東町3丁目3-120-108",
-		tel: "06-6872-2612",
-	},
-	{
-		storeName: "秋鹿酒造",
-		address: "大阪府豊能郡能勢町倉垣1007",
-		tel: "072-737-0013",
-	},
-	{
-		storeName: "酒幸仁",
-		address: "大阪府大阪狭山市池尻中2-9-21",
-		tel: "072-289-8783",
-	},
-	{
-		storeName: "そばの音",
-		address: "大阪市中央区松屋町3-21",
-		tel: "06-6777-9259",
-	},
-	{
-		storeName: "焼き鳥the炭-ズ",
-		address: "大阪市西区九条1-17-4 1F",
-		tel: "080-3507-4312",
-	},
-	{
-		storeName: "君と米",
-		address: "大阪市西区九条1-19-23",
-		tel: "050-8881-7777",
-	},
-	{
-		storeName: "日本酒こころのバー",
-		address: "大阪府堺市北区中百舌鳥町5-795 東口BLD A棟 101号室",
-		tel: "070-8989-8008",
-	},
-	{
-		storeName: "わらまさ",
-		address: "大阪市浪速区難波中1-9-10",
-		tel: "06-6631-9000",
-	},
-	{
-		storeName: "まさちゃん",
-		address: "大阪市浪速区難波中1-11-11",
-		tel: "080-6844-7314",
-	},
-	{
-		storeName: "ルーチャオロン",
-		address: "大阪市西区江戸堀3-7−14",
-		tel: "06-6479-3322",
-	},
-	{
-		storeName: "喜登",
-		address: "大阪市北区南扇町2-3 木村ビル2F",
-		tel: "050-3749-7191",
-	},
-	{
-		storeName: "焼き鳥クカバラ",
-		address: "大阪市北区山崎町1-12 ラピタ扇町1F",
-		tel: "06-6311-7888",
-	},
-	{
-		storeName: "日名田",
-		address: "大阪市中央区南船場3-9-6 Nippo 心斎橋ビル 1F",
-		tel: "06-4708-7488",
-	},
-	{
-		storeName: "マキショウ",
-		address: "大阪市中央区谷町7-1-24 リップルカフェ",
-		tel: "06-7410-2770",
-	},
-	{
-		storeName: "らくだ坂納豆工房",
-		address: "大阪市中央区谷町4-8-29",
-		tel: "070-9029-1710",
-	},
-	{
-		storeName: "酒のねごろっく",
-		address: "和歌山県岩出市畑毛49-1",
-		tel: "0736-62-8377",
-	},
-	{
-		storeName: "酒菜なないろ",
-		address: "大阪市中央区島之内1-14-15 天野ビル 1階",
-		tel: "06-6120-7716",
-	},
-	{
-		storeName: "おく",
-		address: "大阪市都島区片町2-1-37 ストークマンション 1F",
-		tel: "06-6360-9482",
-	},
+const newsItems = [
+  {
+    date: '2026.01.25',
+    title: 'チケット販売店舗を公開しました'
+  },
+  {
+    date: '2026.01.09',
+    title: '2026年上方日本酒ワールド公式サイトを公開しました'
+  },
 ];
 ---
 
@@ -167,7 +73,8 @@ const consignmentStore = [
 									alt="湊町リバープレイス"
 									width="256"
 									height="24"
-								/></a>
+								/></a
+							>
 						</div>
 						<button
 							id="modal-open-button"
@@ -179,6 +86,7 @@ const consignmentStore = [
 					<a href="#about" class="scroll">scroll</a>
 				</div>
 				<div class="section-wrapper">
+					<News items={newsItems}/>
 					<section class="section">
 						<h2 id="about" class="section-title">
 							上方日本酒ワールドとは？
@@ -199,7 +107,9 @@ const consignmentStore = [
 								height="256"
 								class="image-filter"
 							/>
-							<a class="button" href="/consignment">チケット購入可能店舗はこちら</a>
+							<a class="button" href="/consignment"
+								>チケット購入可能店舗はこちら</a
+							>
 						</div>
 						<div class="ticket-type">
 							<img
@@ -211,16 +121,19 @@ const consignmentStore = [
 							/>
 						</div>
 						<div class="ticket-type">
-								<img
-									src="/assets/images/ticket3.svg"
-									alt="e＋チケットはこちら"
-									width="400"
-									height="256"
-									class="image-filter"
-								/>							
-								<a class="button --eplus"
+							<img
+								src="/assets/images/ticket3.svg"
+								alt="e＋チケットはこちら"
+								width="400"
+								height="256"
+								class="image-filter"
+							/>
+							<a
+								class="button --eplus"
 								href="https://eplus.jp/sf/detail/4454100001-P0030001"
-								target="_blank">オンラインチケット購入はこちら</a>
+								target="_blank"
+								>オンラインチケット購入はこちら</a
+							>
 						</div>
 						<!--<div class="ticket-type">
 					 <h3>プレミアムシート</h3>
@@ -257,14 +170,36 @@ const consignmentStore = [
 							<li>心斎橋 和っか✕秋鹿（大阪）</li>
 						</ul>
 					</section>
-					<!-- <section class="section">
-					<h2 id="consignment-store" class="section-title">チケット購入可能店舗</h2>
-					<p class="text-center">参加店舗以外にも、チケットを購入できる美味しい日本酒のお店がたくさんあります！</p>
-					<a href="/consignment" class="button">美味しい日本酒に出会えるお店</a>
-				</section> -->
-					<!-- <section class="section section--premium-seat">
-				<h2 id="premium-seat" class="section-title">✨プレミアムシートのポイント✨</h2>
-				<div class="text-left">
+
+					<section class="section section--premium-seat">
+						<h2 id="premium-seat" class="section-title">
+							プレミアムシート
+						</h2>
+						<p class="text-center">
+							今年もあります。プレミアムシート！<br
+							/>詳細はSNSをフォローしてお待ち下さい！
+						</p>
+						<ul class="sns-list">
+							<li>
+								<a
+									href=`https://x.com/kamigatanihons1`
+									target="_blank"
+									><Image src={iconX} alt="X" /></a>
+							</li>
+							<li>
+								<a
+									href=`https://www.instagram.com/kamigatanw`
+									target="_blank"
+									><Image
+										src={iconInstagram}
+										alt="Instagram"
+									/></a>
+							</li>
+						</ul>
+						<img src={premiumSeat.src} alt="2024年のプレミアムシートの風景" width={premiumSeat.width} height={premiumSeat.height}>
+
+
+						<!-- <div class="text-left">
 					<ul class="point-list">
 						<li>もう並ばなくてOK！特設ブースでスムーズにお料理・お酒を注文・受け取り</li>
 						<li>ゆっくりと座れる空間で、お料理やお燗の待ち時間も快適に</li>
@@ -363,8 +298,8 @@ const consignmentStore = [
 					<a href="https://airrsv.net/kamigata-nwps/calendar" class="button" target="_blank" style="margin-block: 0">予約ページはこちら</a>
 					<button id="premiumSeat-button" class="button premiumSeat-button">予約方法について詳しく見る</button>
 					<p>※クレジットカード以外の決済をご予約時にご利用いただきたい場合は4/17までに<a href="mailto:juttoku.sake@gmail.com?subject=プレミアムシートの決済方法について">juttoku.sake@gmail.com</a>にお問合せください。</p>
-				</div>
-				</section> -->
+				</div> -->
+					</section>
 					<!-- <section class="section" style="display: none">
 					<h2 class="section-title">Instagram</h2>
 					<div class="text-center">
@@ -773,7 +708,7 @@ const consignmentStore = [
 		p {
 			margin: 0.5rem 0 0;
 		}
-		+.ticket-type {
+		+ .ticket-type {
 			margin-top: 3rem;
 		}
 	}
@@ -934,6 +869,22 @@ const consignmentStore = [
 		}
 		td {
 			width: 50%;
+		}
+	}
+	.sns-list {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+		list-style: none;
+		padding: 0;
+		margin: 1.5rem 0;
+		>li {
+			>a {
+				display: block;
+			}
+			img {
+				width: 36px;
+			}
 		}
 	}
 	.time-table {

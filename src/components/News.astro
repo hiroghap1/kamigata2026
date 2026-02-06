@@ -1,0 +1,108 @@
+---
+interface NewsItem {
+  date: string;
+  title: string;
+  content?: string;
+  link?: string;
+}
+
+interface Props {
+  items: NewsItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="news">
+  <h2 class="news__title">お知らせ</h2>
+  <ul class="news__list">
+    {
+      items.map((item) => (
+        <li class="news__item">
+          <time class="news__date" datetime={item.date}>
+            {item.date}
+          </time>
+          <div class="news__content">
+            {item.link ? (
+              <a href={item.link} class="news__link">
+                <span class="news__heading">{item.title}</span>
+                {item.content && <p class="news__text">{item.content}</p>}
+              </a>
+            ) : (
+              <>
+                <span class="news__heading">{item.title}</span>
+                {item.content && <p class="news__text">{item.content}</p>}
+              </>
+            )}
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .news {
+    padding: 1.5rem 0;
+  }
+
+  .news__title {
+    text-align: center;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .news__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .news__item {
+    display: flex;
+    gap: 1rem;
+    padding: 0.75rem 0.5rem;
+    border-bottom: 1px solid #e0e0e0;
+    background: rgb(255 255 255 / 60%);
+    line-height: 1.3;
+  }
+
+  .news__item:first-child {
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .news__date {
+    flex-shrink: 0;
+    font-size: 0.875rem;
+    color: #666;
+    min-width: 5rem;
+  }
+
+  .news__content {
+    flex: 1;
+  }
+
+  .news__link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .news__link:hover .news__heading {
+    color: #009944;
+    text-decoration: underline;
+  }
+
+  .news__heading {
+    font-weight: bold;
+    font-size: 0.9375rem;
+    line-height: 1.4;
+  }
+
+  .news__text {
+    margin: 0.25rem 0 0;
+    font-size: 0.875rem;
+    color: #666;
+    line-height: 1.5;
+  }
+</style>
