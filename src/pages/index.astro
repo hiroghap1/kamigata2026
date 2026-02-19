@@ -27,279 +27,317 @@ import ModalPremiumSeat from "../components/ModalPremiumSeat.astro";
 
 const newsItems = [
   {
-    date: '2026.01.25',
-    title: 'チケット販売店舗を公開しました'
+    date: "2026.01.25",
+    title: "チケット販売店舗を公開しました",
   },
   {
-    date: '2026.01.09',
-    title: '2026年上方日本酒ワールド公式サイトを公開しました'
+    date: "2026.01.09",
+    title: "2026年上方日本酒ワールド公式サイトを公開しました",
   },
 ];
 ---
 
 <Layout title="" ogImage="">
-	<div class="wrapper">
-		<div class="main-wrapper">
-			<main class="main">
-				<Navigation />
-				<div class="main-visual">
-					<div class="container">
-						<h1 class="main__logo">
-							<img
-								src="/assets/images/logo.svg"
-								alt="上方日本酒ワールド2026"
-								width="256"
-								height="192"
-							/>
-							<img
-								src="/assets/images/sakazukin.svg"
-								alt="さかずきん"
-								width="180"
-								height="192"
-							/>
-						</h1>
-						<div class="main__date">
-							<img
-								src="/assets/images/date.svg"
-								alt="開催日時3月21日（土）12時〜18時"
-								width="256"
-								height="166"
-							/>
-						</div>
-						<div class="main__place">
-							<a href="#access"
-								><img
-									src="/assets/images/place.svg"
-									alt="湊町リバープレイス"
-									width="256"
-									height="24"
-								/></a
-							>
-						</div>
-						<button
-							id="modal-open-button"
-							class="modal-open__button"
-							><img src="/assets/images/movie.svg" width="48" />
-							<span>動画を見る</span></button
-						>
-					</div>
-					<a href="#about" class="scroll">scroll</a>
-				</div>
-				<div class="section-wrapper">
-					<News items={newsItems}/>
-					<section class="section">
-						<h2 id="about" class="section-title">
-							上方日本酒ワールドとは？
-						</h2>
-						<p>
-							日本酒を愛する飲食店と酒蔵がタッグを組んで、料理と日本酒を一緒に提供する「食と日本酒の祭典」です！
-						</p>
-						<MovieTrack />
-					</section>
-					<section class="section">
-						<h2 class="section-title">チケット販売</h2>
+  <div class="wrapper">
+    <div class="main-wrapper">
+      <main class="main">
+        <Navigation />
+        <div class="main-visual">
+          <div class="container">
+            <h1 class="main__logo">
+              <img
+                src="/assets/images/logo.svg"
+                alt="上方日本酒ワールド2026"
+                width="256"
+                height="192"
+              />
+              <img
+                src="/assets/images/sakazukin.svg"
+                alt="さかずきん"
+                width="180"
+                height="192"
+              />
+            </h1>
+            <div class="main__date">
+              <img
+                src="/assets/images/date.svg"
+                alt="開催日時3月21日（土）12時〜18時"
+                width="256"
+                height="166"
+              />
+            </div>
+            <div class="main__place">
+              <a href="#access"
+                ><img
+                  src="/assets/images/place.svg"
+                  alt="湊町リバープレイス"
+                  width="256"
+                  height="24"
+                /></a
+              >
+            </div>
+            <button id="modal-open-button" class="modal-open__button"
+              ><img src="/assets/images/movie.svg" width="48" />
+              <span>動画を見る</span></button
+            >
+          </div>
+          <a href="#about" class="scroll">scroll</a>
+        </div>
+        <div class="section-wrapper">
+          <News items={newsItems} />
+          <section class="section">
+            <h2 id="about" class="section-title">上方日本酒ワールドとは？</h2>
+            <p>
+              日本酒を愛する飲食店と酒蔵がタッグを組んで、料理と日本酒を一緒に提供する「食と日本酒の祭典」です！
+            </p>
+            <MovieTrack />
+          </section>
+          <section class="section">
+            <h2 class="section-title">チケット販売</h2>
 
-						<div class="ticket-type">
-							<img
-								src="/assets/images/ticket1.svg"
-								alt="オンライン前売りチケット"
-								width="300"
-								height="256"
-								class="image-filter"
-							/>
-							<a class="button" href="/consignment"
-								>チケット購入可能店舗はこちら</a
-							>
-						</div>
-						<div class="ticket-type">
-							<img
-								src="/assets/images/ticket2.svg"
-								alt="当日チケット"
-								width="400"
-								height="256"
-								class="image-filter"
-							/>
-						</div>
-						<div class="ticket-type">
-							<img
-								src="/assets/images/ticket3.svg"
-								alt="e＋チケットはこちら"
-								width="400"
-								height="256"
-								class="image-filter"
-							/>
-							<a
-								class="button --eplus"
-								href="https://eplus.jp/sf/detail/4454100001-P0030001"
-								target="_blank"
-								>オンラインチケット購入はこちら</a
-							>
-						</div>
-						<!--<div class="ticket-type">
+            <div class="ticket-type">
+              <img
+                src="/assets/images/ticket1.svg"
+                alt="オンライン前売りチケット"
+                width="300"
+                height="256"
+                class="image-filter"
+              />
+              <a class="button" href="/consignment"
+                >チケット購入可能店舗はこちら</a
+              >
+            </div>
+            <div class="ticket-type">
+              <img
+                src="/assets/images/ticket2.svg"
+                alt="当日チケット"
+                width="400"
+                height="256"
+                class="image-filter"
+              />
+            </div>
+            <div class="ticket-type">
+              <img
+                src="/assets/images/ticket3.svg"
+                alt="e＋チケットはこちら"
+                width="400"
+                height="256"
+                class="image-filter"
+              />
+              <a
+                class="button --eplus"
+                href="https://eplus.jp/sf/detail/4454100001-P0030001"
+                target="_blank">オンラインチケット購入はこちら</a
+              >
+            </div>
+            <!--<div class="ticket-type">
 					 <h3>プレミアムシート</h3>
 						<p class="text-left">去年もたくさんの方にご利用いただきました上方日本酒ワールドを快適に楽しめる『プレミアムシート』、今年はさらに快適に進化します！<br>
 							テント内で座って机で食べられるのはもちろんのこと、プレミアムシートエリアに設けた専用特設ブースで、お料理もお酒も注文・受取が出来、スムーズにお楽しみいただけるようにいたしました👍️</p>
 						<img src={premiumSeat2024.src} alt="2024年のプレミアムシートの風景" width={premiumSeat2024.width} height={premiumSeat2024.height}>
 						<a href="#premium-seat" class="button">プレミアムシートについてはこちら</a>
 					</div> -->
-					</section>
-					<section class="section">
-						<h2 id="store" class="section-title">参加店舗＆酒蔵</h2>
-						<ul class="store__list">
-							<li>和食とお酒 蒼✕冨玲（鳥取）</li>
-							<li>青二才（東京）✕あべ（新潟）</li>
-							<li>炭火焼とり えんや✕扶桑鶴（島根）</li>
-							<li>ハナレノミカジノバ✕にいだしぜんしゅ（福島）</li>
-							<li class="new">穂波町和豊✕辨天娘（烏取）</li>
-							<li class="new">焼き鳥クカバラ✕光栄菊（佐賀）</li>
-							<li>紀の国屋くっす～✕楽の世（愛知）</li>
-							<li>穀雨✕龍勢（広島）</li>
-							<li>ふらり酔処 酒場感（沖縄）✕ 独楽蔵（福岡）</li>
-							<li>
-								にほんしゅ屋しゅうろく（京都）✕コイクマ（放浪中）
-							</li>
-							<li>炭焼尚店✕ 竹鶴（広島）</li>
-							<li class="new">
-								炭火と酒 千本鶏（兵庫）✕千代田蔵（兵庫）
-							</li>
-							<li>菜々竈✕紫宙（岩手）</li>
-							<li>ご馳走 ね音✕黒牛（和歌山）</li>
-							<li>和 藤もと✕惣誉（栃木）</li>
-							<li>おでん まる米✕櫛羅（奈良）</li>
-							<li>ritmicita ✕ うつつよのどぶろく（大阪）</li>
-							<li>心斎橋 和っか✕秋鹿（大阪）</li>
-						</ul>
-					</section>
+          </section>
+          <section class="section">
+            <h2 id="store" class="section-title">参加店舗＆酒蔵</h2>
+            <ul class="store__list">
+              <li>和食とお酒 蒼✕冨玲（鳥取）</li>
+              <li>青二才（東京）✕あべ（新潟）</li>
+              <li>炭火焼とり えんや✕扶桑鶴（島根）</li>
+              <li>ハナレノミカジノバ✕にいだしぜんしゅ（福島）</li>
+              <li class="new">穂波町和豊✕辨天娘（烏取）</li>
+              <li class="new">焼き鳥クカバラ✕光栄菊（佐賀）</li>
+              <li>紀の国屋くっす～✕楽の世（愛知）</li>
+              <li>穀雨✕龍勢（広島）</li>
+              <li>ふらり酔処 酒場感（沖縄）✕ 独楽蔵（福岡）</li>
+              <li>にほんしゅ屋しゅうろく（京都）✕コイクマ（放浪中）</li>
+              <li>炭焼尚店✕ 竹鶴（広島）</li>
+              <li class="new">炭火と酒 千本鶏（兵庫）✕千代田蔵（兵庫）</li>
+              <li>菜々竈✕紫宙（岩手）</li>
+              <li>ご馳走 ね音✕黒牛（和歌山）</li>
+              <li>和 藤もと✕惣誉（栃木）</li>
+              <li>おでん まる米✕櫛羅（奈良）</li>
+              <li>ritmicita ✕ うつつよのどぶろく（大阪）</li>
+              <li>心斎橋 和っか✕秋鹿（大阪）</li>
+            </ul>
+          </section>
 
-					<section class="section section--premium-seat">
-						<h2 id="premium-seat" class="section-title">
-							プレミアムシート
-						</h2>
-						<!-- <p class="text-center">
-							今年もあります。プレミアムシート！<br
-							/>詳細はSNSをフォローしてお待ち下さい！
-						</p> -->
-						<!-- <ul class="sns-list">
-							<li>
-								<a
-									href=`https://x.com/kamigatanihons1`
-									target="_blank"
-									><Image src={iconX} alt="X" /></a>
-							</li>
-							<li>
-								<a
-									href=`https://www.instagram.com/kamigatanw`
-									target="_blank"
-									><Image
-										src={iconInstagram}
-										alt="Instagram"
-									/></a>
-							</li>
-						</ul> -->
-						<img src={premiumSeat.src} alt="2024年のプレミアムシートの風景" width={premiumSeat.width} height={premiumSeat.height}>
+          <section class="section section--premium-seat">
+            <h2 id="premium-seat" class="section-title">プレミアムシート</h2>
+            <p class="text-center">
+              今年もあります。プレミアムシート！<br
+              />詳細はSNSをフォローしてお待ち下さい！
+            </p>
+            <ul class="sns-list">
+              <li>
+                <a href=`https://x.com/kamigatanihons1` target="_blank"
+                  ><Image src={iconX} alt="X" /></a
+                >
+              </li>
+              <li>
+                <a href=`https://www.instagram.com/kamigatanw` target="_blank"
+                  ><Image src={iconInstagram} alt="Instagram" /></a
+                >
+              </li>
+            </ul>
+            <img
+              src={premiumSeat.src}
+              alt="2024年のプレミアムシートの風景"
+              width={premiumSeat.width}
+              height={premiumSeat.height}
+            />
 
+            <div class="text-left">
+              <ul class="point-list">
+                <li>
+                  もう並ばなくてOK！特設ブースでスムーズにお料理・お酒を注文・受け取り
+                </li>
+                <li>ゆっくりと座れる空間で、お料理やお燗の待ち時間も快適に</li>
+                <li>
+                  プレミアム体験として、蔵の方が自社の酒の魅力を語る特別トークを実施
+                </li>
+                <li>
+                  カンカン照りや雨など天候に左右されないテント内で、日本酒と料理を心ゆくまで堪能
+                </li>
+              </ul>
 
-						<div class="text-left">
-					<ul class="point-list">
-						<li>もう並ばなくてOK！特設ブースでスムーズにお料理・お酒を注文・受け取り</li>
-						<li>ゆっくりと座れる空間で、お料理やお燗の待ち時間も快適に</li>
-						<li>プレミアム体験として、蔵の方が自社の酒の魅力を語る特別トークを実施</li>
-						<li>カンカン照りや雨など天候に左右されないテント内で、日本酒と料理を心ゆくまで堪能</li>
-					</ul>
-
-					<!-- <p>昨年よりもさらに快適で特別感あふれる空間なこと間違いなし。<br>
+              <!-- <p>昨年よりもさらに快適で特別感あふれる空間なこと間違いなし。<br>
 						プレミアムシートは席数限定！お早めにご予約ください！</p> -->
-				</div>
-					<h3>◆詳細（必ずご注意事項までお読みください）</h3>
-				<div class="text-left">
-					<table class="time-table">
-						<caption>⏳ 時間（100分制）</caption>
-						<tr>
-							<th>時間</th>
-							<th>席数</th>
-						</tr>
-						<tr>
-							<td>12:00～13:40</td>
-							<td>40席</td>
-						</tr>
-						<tr>
-							<td>14:00～15:40</td>
-							<td>60席</td>
-						</tr>
-						<tr>
-							<td>16:00～17:40</td>
-							<td>60席</td>
-						</tr>
-					</table>
-					<p>※初回は開場と同時の30分前、その他は15分前から入場可<br>
-						　ラストオーダーは終了20分前です</p>
+            </div>
+            <!-- <h3>◆詳細（必ずご注意事項までお読みください）</h3>
+            <div class="text-left">
+              <table class="time-table">
+                <caption>⏳ 時間（100分制）</caption>
+                <tr>
+                  <th>時間</th>
+                  <th>席数</th>
+                </tr>
+                <tr>
+                  <td>12:00～13:40</td>
+                  <td>60席</td>
+                </tr>
+                <tr>
+                  <td>14:00～15:40</td>
+                  <td>60席</td>
+                </tr>
+                <tr>
+                  <td>16:00～17:40</td>
+                  <td>60席</td>
+                </tr>
+              </table>
+              <p>
+                ※初回は開場と同時の30分前、その他は15分前から入場可<br />
+                　ラストオーダーは終了20分前です
+              </p>
 
-					<h3>💰 料金</h3>
-					<div class="text-center" style="line-height: 1.2;margin-top: 1rem"><h4 class="price">100分 2,500円</h4>（ワンドリンクチケット付き）
-					<p style="margin-top: .5rem">※別途参加チケットが必要です</p></div>
+              <h3>💰 料金</h3>
+              <div
+                class="text-center"
+                style="line-height: 1.2;margin-top: 1rem"
+              >
+                <h4 class="price">100分 3,000円</h4>（ワンドリンクチケット付き）
+                <p style="margin-top: .5rem">※別途参加チケットが必要です</p>
+              </div>
 
-					<h3>📌 注意事項</h3>
-					<p>プレミアムシートをご利用いただく皆様に、より快適にお楽しみいただくため、以下の点にご注意ください。</p>
-					<dl>
-						<div>
-							<dt>時間について</dt>
-							<dd>プレミアムシートは時間枠ごとの予約制となりますので、遅れてご来場された場合も終了時間の延長はできませんのでご注意ください。</dd>
-						</div>
-						<div>
-							<dt>お料理のご提供について</dt>
-							<dd>料理は売り切れ次第、注文不可となりますので、あらかじめご了承ください。</dd>
-							<dd>一部の店舗の料理は、専用の特設ブースでご購入いただけない可能性がございます。</dd>
-						</div>
-						<div>
-							<dt>お料理・お酒のブースでのお支払い方法について</dt>
-							<dd>現金またはPayPayのみご利用いただけます。</dd>
-						</div>
-						<div>
-							<dt>当日券について</dt>
-							<dd>予約で満席の場合、当日券の販売はございません。</dd>
-						</div>
-						<div>
-							<dt>お子様のご利用について</dt>
-							<dd>小学生1名まで無料、2人目からは有料となります。</dd>
-							<dd>ベビーカーのご利用OK！スロープもございますので、ご安心ください。</dd>
-						</div>
-						<div>
-							<dt>受付・キャンセルについて</dt>
-							<dd>受付締切…1日前の0時までご予約いただけます</dd>
-							<dd><div>キャンセル受付締切…2日前の0時までキャンセルが可能です</div></dd>
-						</div>
-					</dl>
-					<table class="cancel-poricy">
-						<caption>キャンセルポリシー</caption>
-						<tbody>
-						<tr>
-							<th colspan="2">キャンセル料</th>
-						</tr>
-						<tr>
-							<td>利用日の2日前</td>
-							<td>料金の0%</td>
-						</tr>
-						<tr>
-							<td>利用日の1日前</td>
-							<td>料金の100%</td>
-						</tr>
-						<tr>
-							<td>当日</td>
-							<td>料金の100%</td>
-						</tr>
-					</table>
-					<p>上記について十分ご注意いただき、ご予約をお願いいたします。<br>
-						ご理解とご協力のほど、よろしくお願いいたします。<br>
-						何かご不明な点がございましたら、<a href="mailto:juttoku.sake@gmail.com?subject=プレミアムシートについて">juttoku.sake@gmail.com</a>までお気軽にご連絡ください。</p>
+              <h3>📌 注意事項</h3>
+              <p>
+                プレミアムシートをご利用いただく皆様に、より快適にお楽しみいただくため、以下の点にご注意ください。
+              </p>
+              <dl>
+                <div>
+                  <dt>時間について</dt>
+                  <dd>
+                    プレミアムシートは時間枠ごとの予約制となりますので、遅れてご来場された場合も終了時間の延長はできませんのでご注意ください。
+                  </dd>
+                </div>
+                <div>
+                  <dt>お料理のご提供について</dt>
+                  <dd>
+                    料理は売り切れ次第、注文不可となりますので、あらかじめご了承ください。
+                  </dd>
+                  <dd>
+                    一部の店舗の料理は、専用の特設ブースでご購入いただけない可能性がございます。
+                  </dd>
+                </div>
+                <div>
+                  <dt>お料理・お酒のブースでのお支払い方法について</dt>
+                  <dd>現金またはPayPayのみご利用いただけます。</dd>
+                </div>
+                <div>
+                  <dt>当日券について</dt>
+                  <dd>予約で満席の場合、当日券の販売はございません。</dd>
+                </div>
+                <div>
+                  <dt>お子様のご利用について</dt>
+                  <dd>小学生1名まで無料、2人目からは有料となります。</dd>
+                  <dd>
+                    ベビーカーのご利用OK！スロープもございますので、ご安心ください。
+                  </dd>
+                </div>
+                <div>
+                  <dt>受付・キャンセルについて</dt>
+                  <dd>受付締切…1日前の0時までご予約いただけます</dd>
+                  <dd>
+                    <div>
+                      キャンセル受付締切…2日前の0時までキャンセルが可能です
+                    </div>
+                  </dd>
+                </div>
+              </dl>
+              <table class="cancel-poricy">
+                <caption>キャンセルポリシー</caption>
+                <tbody>
+                  <tr>
+                    <th colspan="2">キャンセル料</th>
+                  </tr>
+                  <tr>
+                    <td>利用日の2日前</td>
+                    <td>料金の0%</td>
+                  </tr>
+                  <tr>
+                    <td>利用日の1日前</td>
+                    <td>料金の100%</td>
+                  </tr>
+                  <tr>
+                    <td>当日</td>
+                    <td>料金の100%</td>
+                  </tr>
+                </tbody>
+                <p>
+                  上記について十分ご注意いただき、ご予約をお願いいたします。<br
+                  />
+                  ご理解とご協力のほど、よろしくお願いいたします。<br />
+                  何かご不明な点がございましたら、<a
+                    href="mailto:juttoku.sake@gmail.com?subject=プレミアムシートについて"
+                    >juttoku.sake@gmail.com</a
+                  >までお気軽にご連絡ください。
+                </p>
 
-					<h3>📅 予約方法</h3>
-					<p>下記の予約システムよりクレジットカード決済でご予約ください</p>
-					<a href="https://airrsv.net/kamigata-nwps/calendar" class="button" target="_blank" style="margin-block: 0">予約ページはこちら</a>
-					<button id="premiumSeat-button" class="button premiumSeat-button">予約方法について詳しく見る</button>
-					<p>※クレジットカード以外の決済をご予約時にご利用いただきたい場合は4/17までに<a href="mailto:juttoku.sake@gmail.com?subject=プレミアムシートの決済方法について">juttoku.sake@gmail.com</a>にお問合せください。</p>
-				</div>
-					</section>
-					<!-- <section class="section" style="display: none">
+                <h3>📅 予約方法</h3>
+                <p>
+                  下記の予約システムよりクレジットカード決済でご予約ください
+                </p>
+                <a
+                  href="https://airrsv.net/kamigata-nwps/calendar"
+                  class="button"
+                  target="_blank"
+                  style="margin-block: 0">予約ページはこちら</a
+                >
+                <button
+                  id="premiumSeat-button"
+                  class="button premiumSeat-button"
+                  >予約方法について詳しく見る</button
+                >
+                <p>
+                  ※クレジットカード以外の決済をご予約時にご利用いただきたい場合は4/17までに<a
+                    href="mailto:juttoku.sake@gmail.com?subject=プレミアムシートの決済方法について"
+                    >juttoku.sake@gmail.com</a
+                  >にお問合せください。
+                </p>
+              </table>
+            </div> -->
+			</section>
+            <!-- <section class="section" style="display: none">
 					<h2 class="section-title">Instagram</h2>
 					<div class="text-center">
 						<a href="https://www.instagram.com/kamigatanw/" target="_blank"><img src={instagram.src} alt="" width="32" height="32"></a>
@@ -316,601 +354,598 @@ const newsItems = [
 						<p>たくさんの方のご応募、ありがとうございました！</p>
 					</div>
 				</section> -->
-					<section class="section section--access">
-						<h2 id="access" class="section-title">アクセス</h2>
-						<p>湊町リバープレイス</p>
-						<p>〒556-0017<br />大阪府大阪市浪速区湊町1丁目3-1</p>
-						<ul>
-							<li>
-								Osaka Metro なんば駅26−B出口すぐ<br />
-								（なんばウォークB26出口とお間違えのない様ご注意下さい。）<br
-								/>
-								御堂筋線（北西改札・北南改札）徒歩約5分<br />
-								四つ橋線（北改札）徒歩約2分<br />
-								千日前線（西改札）徒歩約2分
-							</li>
-							<li>JR難波駅（北改札口）徒歩約3分</li>
-							<li>近鉄・阪神　大阪難波駅（西改札）徒歩約2分</li>
-							<li>南海なんば駅（北改札口）徒歩10分</li>
-						</ul>
-						<iframe
-							class="googlemap"
-							src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13125.821091593649!2d135.4958493!3d34.6684574!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000e70e0aceba5f%3A0xd005c6e455124fbf!2z5rmK55S644Oq44OQ44O844OX44Os44Kk44K5!5e0!3m2!1sja!2sjp!4v1737113278581!5m2!1sja!2sjp"
-							width="600"
-							height="450"
-							style="border:0;"
-							allowfullscreen=""
-							loading="lazy"
-							referrerpolicy="no-referrer-when-downgrade"
-						></iframe>
-					</section>
-				</div>
-			</main>
-			<footer class="footer">
-				<p class="footer__copy">
-					©︎上方日本酒ワールド ©上方日本酒ワールド実行委員会 ©SAKAZUKIN
-				</p>
-			</footer>
-		</div>
-		<div class="main__imageBox">
-			<img
-				class="main__image"
-				src="/assets/images/bg.jpg"
-				alt=""
-				width="1920"
-				height="1280"
-			/>
-			<img class="main__image" src={mainBg.src} />
-		</div>
-	</div>
-	<ModalMovie />
-	<ModalConsignmentStore />
-	<ModalPremiumSeat />
-</Layout>
+            <section class="section section--access">
+              <h2 id="access" class="section-title">アクセス</h2>
+              <p>湊町リバープレイス</p>
+              <p>〒556-0017<br />大阪府大阪市浪速区湊町1丁目3-1</p>
+              <ul>
+                <li>
+                  Osaka Metro なんば駅26−B出口すぐ<br />
+                  （なんばウォークB26出口とお間違えのない様ご注意下さい。）<br
+                  />
+                  御堂筋線（北西改札・北南改札）徒歩約5分<br />
+                  四つ橋線（北改札）徒歩約2分<br />
+                  千日前線（西改札）徒歩約2分
+                </li>
+                <li>JR難波駅（北改札口）徒歩約3分</li>
+                <li>近鉄・阪神　大阪難波駅（西改札）徒歩約2分</li>
+                <li>南海なんば駅（北改札口）徒歩10分</li>
+              </ul>
+              <iframe
+                class="googlemap"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13125.821091593649!2d135.4958493!3d34.6684574!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000e70e0aceba5f%3A0xd005c6e455124fbf!2z5rmK55S644Oq44OQ44O844OX44Os44Kk44K5!5e0!3m2!1sja!2sjp!4v1737113278581!5m2!1sja!2sjp"
+                width="600"
+                height="450"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </section>
+          </section>
+        </div>
+        <footer class="footer">
+          <p class="footer__copy">
+            ©︎上方日本酒ワールド ©上方日本酒ワールド実行委員会 ©SAKAZUKIN
+          </p>
+        </footer>
+      </main>
+      <div class="main__imageBox">
+        <img
+          class="main__image"
+          src="/assets/images/bg.jpg"
+          alt=""
+          width="1920"
+          height="1280"
+        />
+        <img class="main__image" src={mainBg.src} />
+      </div>
+    </div>
+    <ModalMovie />
+    <ModalConsignmentStore />
+    <ModalPremiumSeat />
+  </div>
 
-<script>
-	import gsap from "gsap";
-	import { ScrollTrigger } from "gsap/ScrollTrigger";
+  <script>
+    import gsap from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-	gsap.registerPlugin(ScrollTrigger);
-	document.querySelectorAll(".section-title").forEach((el, index) => {
-		ScrollTrigger.create({
-			trigger: el,
-			id: index + 1,
-			start: "top 70%",
-			toggleClass: { targets: el, className: "is-active" },
-			once: true,
-		});
-	});
+    gsap.registerPlugin(ScrollTrigger);
+    document.querySelectorAll(".section-title").forEach((el, index) => {
+      ScrollTrigger.create({
+        trigger: el,
+        id: index + 1,
+        start: "top 70%",
+        toggleClass: { targets: el, className: "is-active" },
+        once: true,
+      });
+    });
 
-	const modalOpenButton = document.getElementById("modal-open-button");
-	const modal = document.getElementById("modal");
-	modalOpenButton.addEventListener("click", () => {
-		modal.showModal();
-	});
-	modal.addEventListener("click", (event) => {
-		if (event.target.closest("#modal-inner") === null) {
-			modal.close();
-		}
-	});
+    const modalOpenButton = document.getElementById("modal-open-button");
+    const modal = document.getElementById("modal");
+    modalOpenButton.addEventListener("click", () => {
+      modal.showModal();
+    });
+    modal.addEventListener("click", (event) => {
+      if (event.target.closest("#modal-inner") === null) {
+        modal.close();
+      }
+    });
 
-	const modalConsignmentStoreOpenButton = document.querySelectorAll(
-		".consignment-store__button",
-	);
-	const modalConsignmentStore = document.getElementById(
-		"modal-consignment-store",
-	);
-	const modalConsignmentStoreTitle = document.getElementById(
-		"modal-consignment-store-title",
-	);
-	const modalConsignmentStoreAddress = document.getElementById(
-		"modal-consignment-store-address",
-	);
-	const modalConsignmentStoreTel = document.getElementById(
-		"modal-consignment-store-tel",
-	);
-	const modalConsignmentStoreMap = document.getElementById(
-		"modal-consignment-store-map",
-	);
-	modalConsignmentStoreOpenButton.forEach((button) => {
-		button.addEventListener("click", (event) => {
-			console.log(event.target);
-			const storeData = event.target;
-			modalConsignmentStoreTitle.textContent =
-				storeData.dataset.storename;
-			modalConsignmentStoreAddress.textContent =
-				storeData.dataset.address;
-			modalConsignmentStoreTel.innerHTML = `<a href="tel:${storeData.dataset.tel}">${storeData.dataset.tel}</a>`;
-			modalConsignmentStoreMap.src = `https://maps.google.co.jp/maps?output=embed&q=${storeData.dataset.storename} ${storeData.dataset.address}&z=16`;
-			modalConsignmentStore.showModal();
-		});
-	});
-	modalConsignmentStore.addEventListener("click", (event) => {
-		if (event.target.closest("#modal-consignment-store-inner") === null) {
-			modalConsignmentStoreMap.src = "";
-			modalConsignmentStore.close();
-		}
-	});
+    const modalConsignmentStoreOpenButton = document.querySelectorAll(
+      ".consignment-store__button",
+    );
+    const modalConsignmentStore = document.getElementById(
+      "modal-consignment-store",
+    );
+    const modalConsignmentStoreTitle = document.getElementById(
+      "modal-consignment-store-title",
+    );
+    const modalConsignmentStoreAddress = document.getElementById(
+      "modal-consignment-store-address",
+    );
+    const modalConsignmentStoreTel = document.getElementById(
+      "modal-consignment-store-tel",
+    );
+    const modalConsignmentStoreMap = document.getElementById(
+      "modal-consignment-store-map",
+    );
+    modalConsignmentStoreOpenButton.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        console.log(event.target);
+        const storeData = event.target;
+        modalConsignmentStoreTitle.textContent = storeData.dataset.storename;
+        modalConsignmentStoreAddress.textContent = storeData.dataset.address;
+        modalConsignmentStoreTel.innerHTML = `<a href="tel:${storeData.dataset.tel}">${storeData.dataset.tel}</a>`;
+        modalConsignmentStoreMap.src = `https://maps.google.co.jp/maps?output=embed&q=${storeData.dataset.storename} ${storeData.dataset.address}&z=16`;
+        modalConsignmentStore.showModal();
+      });
+    });
+    modalConsignmentStore.addEventListener("click", (event) => {
+      if (event.target.closest("#modal-consignment-store-inner") === null) {
+        modalConsignmentStoreMap.src = "";
+        modalConsignmentStore.close();
+      }
+    });
 
-	const modalPremiumSeatButton =
-		document.getElementById("premiumSeat-button");
-	const modalPremiumSeat = document.getElementById("premiumSeatModal");
-	modalPremiumSeatButton.addEventListener("click", () => {
-		modalPremiumSeat.showModal();
-	});
-	modalPremiumSeat.addEventListener("click", (event) => {
-		if (event.target.closest("#premiumSeatModal-inner") === null) {
-			modalPremiumSeat.close();
-		}
-	});
+    const modalPremiumSeatButton =
+      document.getElementById("premiumSeat-button");
+    const modalPremiumSeat = document.getElementById("premiumSeatModal");
+    modalPremiumSeatButton.addEventListener("click", () => {
+      modalPremiumSeat.showModal();
+    });
+    modalPremiumSeat.addEventListener("click", (event) => {
+      if (event.target.closest("#premiumSeatModal-inner") === null) {
+        modalPremiumSeat.close();
+      }
+    });
 
-	// Instagram
-	const photos = 9; // 表示する枚数
-	const wordCount = 30; // キャプション表示文字数。区切らない場合は0
+    // Instagram
+    const photos = 9; // 表示する枚数
+    const wordCount = 30; // キャプション表示文字数。区切らない場合は0
 
-	fetch("https://kamigata-nihonshu.com/api/get-feed.php")
-		.then((response) => {
-			return response.json();
-		})
-		.then((data) => {
-			let html = "";
-			const json = data.data;
-			console.log(json);
-			const length = json.length < photos ? json.length : photos;
+    fetch("https://kamigata-nihonshu.com/api/get-feed.php")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        let html = "";
+        const json = data.data;
+        console.log(json);
+        const length = json.length < photos ? json.length : photos;
 
-			for (let i = 0; i < length; i++) {
-				const item = json[i];
-				html += `<a class="instagram__item" href="${item.permalink}" target="_blank">`;
-				if (item.media_url.includes(".mp4?")) {
-					html += `<video controls>
+        for (let i = 0; i < length; i++) {
+          const item = json[i];
+          html += `<a class="instagram__item" href="${item.permalink}" target="_blank">`;
+          if (item.media_url.includes(".mp4?")) {
+            html += `<video controls>
                 <source src="${item.media_url}" type="video/mp4">
                 Your browser does not support the video tag.
              </video>`;
-				} else {
-					html += `<img src="${item.media_url}" alt="">`;
-				}
-				html += `</a>`;
-			}
+          } else {
+            html += `<img src="${item.media_url}" alt="">`;
+          }
+          html += `</a>`;
+        }
 
-			document.getElementById("instagram-feed").innerHTML = html;
-		})
-		.catch((error) => {
-			console.error("エラーが発生しました", error);
-			document.getElementById("instagram-feed").innerHTML =
-				"データを取得できませんでした。しばらくしてからお試しください。" +
-				error;
-		});
-</script>
+        document.getElementById("instagram-feed").innerHTML = html;
+      })
+      .catch((error) => {
+        console.error("エラーが発生しました", error);
+        document.getElementById("instagram-feed").innerHTML =
+          "データを取得できませんでした。しばらくしてからお試しください。" +
+          error;
+      });
+  </script>
 
-<style lang="scss">
-	.wrapper {
-		display: grid;
-		height: 100%;
-		grid-template-columns: 1fr;
-	}
-	.main-wrapper {
-		width: 100%;
-		max-width: 480px;
-		margin-inline: auto;
-		padding-inline: 1rem;
-		grid-column: 1/2;
-		grid-row: 1/2;
-		grid-template-columns: 1fr;
-		grid-template-rows: 1fr fit-content(100px);
-	}
-	.main {
-		grid-column: 1/2;
-		grid-row: 1/2;
-		padding-top: 100svh;
-	}
-	.main-visual {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		margin: auto;
-		height: 100svh;
-		display: grid;
-		place-items: center;
-	}
-	.section-wrapper {
-		position: relative;
-		z-index: 1;
-		background-color: white;
-		width: 100%;
-		padding: 1rem 1rem 2rem;
-		box-shadow: 0 -2px 2px rgba(0 0 0 /25%);
-		background: white url(/assets/images/paper-bg.jpg);
-	}
-	.footer {
-		padding-block: 1rem;
-		background-color: #fff;
-		text-align: center;
-		position: relative;
-		z-index: 1;
-	}
-	.main__imageBox {
-		position: fixed;
-		width: 100%;
-		height: 100%;
-		display: grid;
-		grid-template-areas: "image";
-		grid-column: 1/2;
-		grid-row: 1/3;
-		z-index: -1;
-	}
-	.main__image {
-		grid-area: image;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		// animation: brightness 1s both;
-	}
-	@keyframes brightness {
-		0% {
-			filter: brightness(0);
-		}
-		100% {
-			filter: brightness(0.6);
-		}
-	}
-	.main {
-		display: grid;
-		place-items: center;
-	}
-	.footer__copy {
-		font-size: min(4vw, 0.8rem);
-	}
-	.container > * + * {
-		margin-top: 1rem;
-	}
-	.container img {
-		filter: drop-shadow(1px 1px 2px rgb(0 0 0 / 25%));
-	}
-	.main__logo {
-		text-align: center;
-		transform-origin: center bottom;
-		animation: logo 1s both;
-		> img {
-			display: block;
-			margin-inline: auto;
-			+ img {
-				margin-top: 1rem;
-			}
-		}
-	}
-	.main__date,
-	.main__place {
-		animation: fadeIn 1s both 0.6s;
-	}
-	@keyframes logo {
-		0% {
-			transform: rotateX(90deg);
-		}
-		100% {
-			transform: rotateX(0deg);
-		}
-	}
+  <style lang="scss">
+    .wrapper {
+      display: grid;
+      height: 100%;
+      grid-template-columns: 1fr;
+    }
+    .main-wrapper {
+      width: 100%;
+      max-width: 480px;
+      margin-inline: auto;
+      padding-inline: 1rem;
+      grid-column: 1/2;
+      grid-row: 1/2;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr fit-content(100px);
+    }
+    .main {
+      grid-column: 1/2;
+      grid-row: 1/2;
+      padding-top: 100svh;
+    }
+    .main-visual {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      height: 100svh;
+      display: grid;
+      place-items: center;
+    }
+    .section-wrapper {
+      position: relative;
+      z-index: 1;
+      background-color: white;
+      width: 100%;
+      padding: 1rem 1rem 2rem;
+      box-shadow: 0 -2px 2px rgba(0 0 0 /25%);
+      background: white url(/assets/images/paper-bg.jpg);
+    }
+    .footer {
+      padding-block: 1rem;
+      background-color: #fff;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .main__imageBox {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-areas: "image";
+      grid-column: 1/2;
+      grid-row: 1/3;
+      z-index: -1;
+    }
+    .main__image {
+      grid-area: image;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      // animation: brightness 1s both;
+    }
+    @keyframes brightness {
+      0% {
+        filter: brightness(0);
+      }
+      100% {
+        filter: brightness(0.6);
+      }
+    }
+    .main {
+      display: grid;
+      place-items: center;
+    }
+    .footer__copy {
+      font-size: min(4vw, 0.8rem);
+    }
+    .container > * + * {
+      margin-top: 1rem;
+    }
+    .container img {
+      filter: drop-shadow(1px 1px 2px rgb(0 0 0 / 25%));
+    }
+    .main__logo {
+      text-align: center;
+      transform-origin: center bottom;
+      animation: logo 1s both;
+      > img {
+        display: block;
+        margin-inline: auto;
+        + img {
+          margin-top: 1rem;
+        }
+      }
+    }
+    .main__date,
+    .main__place {
+      animation: fadeIn 1s both 0.6s;
+    }
+    @keyframes logo {
+      0% {
+        transform: rotateX(90deg);
+      }
+      100% {
+        transform: rotateX(0deg);
+      }
+    }
 
-	@keyframes fadeIn {
-		0% {
-			transform: scale(1.5, 1.2);
-			opacity: 0;
-			filter: blur(20px);
-		}
-		100% {
-			transform: scale(1, 1);
-			opacity: 1;
-			filter: blur(0);
-		}
-	}
+    @keyframes fadeIn {
+      0% {
+        transform: scale(1.5, 1.2);
+        opacity: 0;
+        filter: blur(20px);
+      }
+      100% {
+        transform: scale(1, 1);
+        opacity: 1;
+        filter: blur(0);
+      }
+    }
 
-	.section-title {
-		text-align: center;
-		&::before {
-			content: "";
-			display: block;
-			width: 77px;
-			height: 75px;
-			margin-inline: auto;
-			opacity: 0;
-			background: url(/assets/images/sakazukin.svg) no-repeat
-				center/contain;
-		}
-		&.is-active {
-			&::before {
-				animation: title 1s both;
-			}
-		}
-		@keyframes title {
-			0% {
-				transform: scale(0.9, 1.2) translateY(-100%);
-				opacity: 0;
-			}
-			50% {
-				transform: scale(1.2, 0.8) translateY(15%);
-				opacity: 1;
-			}
-			100% {
-				transform: scale(1) translate(0);
-				opacity: 1;
-			}
-		}
-	}
-	h3 {
-		text-align: center;
-	}
-	.one-date-image {
-		width: 10rem;
-		margin: auto;
-		display: block;
-		filter: drop-shadow(0 0 3px rgba(7 116 114/ 100%));
-	}
-	.store__list {
-		list-style: none;
-		width: fit-content;
-		margin-inline: auto;
-		padding-left: 1rem;
-		margin-bottom: 3rem;
-		> li {
-			line-height: 1.4;
-			margin-top: 0.5rem;
-		}
-		> .new {
-			position: relative;
-			&::before {
-				position: absolute;
-				content: "";
-				display: inline-block;
-				width: 1.6em;
-				height: 1.6em;
-				top: -0.1em;
-				left: -1.8em;
-				background: url(/assets/images/new.svg) no-repeat center/contain;
-			}
-		}
-	}
-	.section {
-		position: relative;
-		padding-block: 2rem;
-		&::after {
-			content: "";
-			display: block;
-			width: 300px;
-			height: 95px;
-			margin-inline: auto;
-			translate: 0 40%;
-			background: url(/assets/images/section-decoration.svg) no-repeat
-				center/contain;
-		}
-	}
-	.image-filter {
-		display: block;
-		margin-inline: auto;
-		filter: drop-shadow(0 0 1px rgba(7 116 114/ 100%));
-	}
-	h3 {
-		font-size: 120%;
-		margin: 0;
-	}
-	.price {
-		font-size: 150%;
-		margin: 0;
-	}
-	h4 {
-		font-size: 110%;
-		text-align: center;
-	}
-	.ticket-type {
-		margin-top: 2rem;
-		text-align: center;
-		p {
-			margin: 0.5rem 0 0;
-		}
-		+ .ticket-type {
-			margin-top: 3rem;
-		}
-	}
-	.scroll {
-		position: absolute;
-		bottom: 10px;
-		color: white;
-		text-decoration: none;
-		&::after {
-			content: "";
-			display: block;
-			width: 1px;
-			height: 30px;
-			margin-inline: auto;
-			background-color: white;
-			animation: scroll 1.5s infinite 0.6s;
-			transform-origin: top;
-		}
-	}
-	@keyframes scroll {
-		from {
-			transform: scaleY(0);
-		}
-		to {
-			transform: scaleY(1);
-		}
-	}
-	.button {
-		display: flex;
-		text-decoration: none;
-		align-items: center;
-		justify-content: center;
-		padding: 0.5rem 1.2rem 0.45rem;
-		background-color: #009944;
-		color: white;
-		width: fit-content;
-		margin: 1.5rem auto 0.5rem;
-		&.--peatix {
-			background-color: #4d9940;
-			padding: 0.35rem 1rem 0.25rem;
-			margin: 0 auto 0.5rem;
-		}
-		&.--eplus {
-			background-color: #e95098;
-		}
-		&.disabled {
-			pointer-events: none;
-			position: relative;
-			background: #aaa;
-			color: #ddd;
-			&::before {
-				content: "募集は終了しました";
-				position: absolute;
-				display: block;
-				border: 2px solid;
-				padding: 0.2rem 0.5rem;
-				color: rgb(255 0 0);
-				font-weight: bold;
-				border-radius: 0.2rem;
-				background: rgb(255 235 235 / 55%);
-				rotate: -10deg;
-			}
-		}
-	}
-	.section--access {
-		p {
-			line-height: 1.4;
-			width: fit-content;
-			margin-inline: auto;
-		}
-		li {
-			line-height: 1.4;
-			margin-top: 0.3rem;
-			font-size: 14px;
-		}
-	}
-	.modal-open__button {
-		margin: auto;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		background: transparent;
-		border: 0;
-		cursor: pointer;
-		color: white;
-		animation: fadeIn 1s both 1s;
-	}
-	.instagram-feed {
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
-		grid-template-rows: 1fr 1fr 1fr;
-		gap: 4px;
-	}
-	.consignment-store__list {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 8px 16px;
-		padding-left: 0;
-		list-style: none;
-	}
-	.consignment-store__button {
-		display: block;
-		width: 100%;
-		height: 100%;
-		text-align: left;
-		padding: 0.5rem 1rem;
-		background: rgba(255 255 255/ 40%);
-		border: 0;
-		cursor: pointer;
-	}
-	.point-list {
-		padding-inline: 1rem;
-		text-align: left;
-		list-style-type: none;
-		li {
-			display: flex;
+    .section-title {
+      text-align: center;
+      &::before {
+        content: "";
+        display: block;
+        width: 77px;
+        height: 75px;
+        margin-inline: auto;
+        opacity: 0;
+        background: url(/assets/images/sakazukin.svg) no-repeat center/contain;
+      }
+      &.is-active {
+        &::before {
+          animation: title 1s both;
+        }
+      }
+      @keyframes title {
+        0% {
+          transform: scale(0.9, 1.2) translateY(-100%);
+          opacity: 0;
+        }
+        50% {
+          transform: scale(1.2, 0.8) translateY(15%);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1) translate(0);
+          opacity: 1;
+        }
+      }
+    }
+    h3 {
+      text-align: center;
+    }
+    .one-date-image {
+      width: 10rem;
+      margin: auto;
+      display: block;
+      filter: drop-shadow(0 0 3px rgba(7 116 114/ 100%));
+    }
+    .store__list {
+      list-style: none;
+      width: fit-content;
+      margin-inline: auto;
+      padding-left: 1rem;
+      margin-bottom: 3rem;
+      > li {
+        line-height: 1.4;
+        margin-top: 0.5rem;
+      }
+      > .new {
+        position: relative;
+        &::before {
+          position: absolute;
+          content: "";
+          display: inline-block;
+          width: 1.6em;
+          height: 1.6em;
+          top: -0.1em;
+          left: -1.8em;
+          background: url(/assets/images/new.svg) no-repeat center/contain;
+        }
+      }
+    }
+    .section {
+      position: relative;
+      padding-block: 2rem;
+      &::after {
+        content: "";
+        display: block;
+        width: 300px;
+        height: 95px;
+        margin-inline: auto;
+        translate: 0 40%;
+        background: url(/assets/images/section-decoration.svg) no-repeat
+          center/contain;
+      }
+    }
+    .image-filter {
+      display: block;
+      margin-inline: auto;
+      filter: drop-shadow(0 0 1px rgba(7 116 114/ 100%));
+    }
+    h3 {
+      font-size: 120%;
+      margin: 0;
+    }
+    .price {
+      font-size: 150%;
+      margin: 0;
+    }
+    h4 {
+      font-size: 110%;
+      text-align: center;
+    }
+    .ticket-type {
+      margin-top: 2rem;
+      text-align: center;
+      p {
+        margin: 0.5rem 0 0;
+      }
+      + .ticket-type {
+        margin-top: 3rem;
+      }
+    }
+    .scroll {
+      position: absolute;
+      bottom: 10px;
+      color: white;
+      text-decoration: none;
+      &::after {
+        content: "";
+        display: block;
+        width: 1px;
+        height: 30px;
+        margin-inline: auto;
+        background-color: white;
+        animation: scroll 1.5s infinite 0.6s;
+        transform-origin: top;
+      }
+    }
+    @keyframes scroll {
+      from {
+        transform: scaleY(0);
+      }
+      to {
+        transform: scaleY(1);
+      }
+    }
+    .button {
+      display: flex;
+      text-decoration: none;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 1.2rem 0.45rem;
+      background-color: #009944;
+      color: white;
+      width: fit-content;
+      margin: 1.5rem auto 0.5rem;
+      &.--peatix {
+        background-color: #4d9940;
+        padding: 0.35rem 1rem 0.25rem;
+        margin: 0 auto 0.5rem;
+      }
+      &.--eplus {
+        background-color: #e95098;
+      }
+      &.disabled {
+        pointer-events: none;
+        position: relative;
+        background: #aaa;
+        color: #ddd;
+        &::before {
+          content: "募集は終了しました";
+          position: absolute;
+          display: block;
+          border: 2px solid;
+          padding: 0.2rem 0.5rem;
+          color: rgb(255 0 0);
+          font-weight: bold;
+          border-radius: 0.2rem;
+          background: rgb(255 235 235 / 55%);
+          rotate: -10deg;
+        }
+      }
+    }
+    .section--access {
+      p {
+        line-height: 1.4;
+        width: fit-content;
+        margin-inline: auto;
+      }
+      li {
+        line-height: 1.4;
+        margin-top: 0.3rem;
+        font-size: 14px;
+      }
+    }
+    .modal-open__button {
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      color: white;
+      animation: fadeIn 1s both 1s;
+    }
+    .instagram-feed {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      gap: 4px;
+    }
+    .consignment-store__list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+      padding-left: 0;
+      list-style: none;
+    }
+    .consignment-store__button {
+      display: block;
+      width: 100%;
+      height: 100%;
+      text-align: left;
+      padding: 0.5rem 1rem;
+      background: rgba(255 255 255/ 40%);
+      border: 0;
+      cursor: pointer;
+    }
+    .point-list {
+      padding-inline: 1rem;
+      text-align: left;
+      list-style-type: none;
+      li {
+        display: flex;
 
-			&::before {
-				content: "✔";
-				margin-right: 0.5rem;
-			}
-		}
-	}
-	dl > div + div {
-		margin-top: 0.5rem;
-		padding-top: 0.5rem;
-		border-top: 1px solid #ccc;
-	}
-	dt {
-		display: flex;
-		&::before {
-			content: "▶";
-			margin-right: 0.5rem;
-		}
-	}
-	dd {
-		display: flex;
-		margin-left: 2em;
-		&::before {
-			content: "✔";
-			margin-right: 0.5rem;
-		}
-	}
-	table {
-		border-collapse: collapse;
-	}
-	.cancel-poricy {
-		width: 100%;
-		th,
-		td {
-			padding: 0.25rem 0.5rem;
-			border: 1px solid #999;
-			background-color: rgb(255 255 255/ 40%);
-		}
-		th {
-			text-align: center;
-		}
-		td {
-			width: 50%;
-		}
-	}
-	.sns-list {
-		display: flex;
-		justify-content: center;
-		gap: 1rem;
-		list-style: none;
-		padding: 0;
-		margin: 1.5rem 0;
-		>li {
-			>a {
-				display: block;
-			}
-			img {
-				width: 36px;
-			}
-		}
-	}
-	.time-table {
-		width: 100%;
-		th,
-		td {
-			padding: 0.25rem;
-			border: 1px solid #999;
-			background-color: rgb(255 255 255/ 40%);
-			text-align: center;
-		}
-		th {
-		}
-		td {
-			width: 50%;
-		}
-	}
-	.section--premium-seat {
-		h3 {
-			margin-top: 1.5rem;
-		}
-	}
-	.premiumSeat-button {
-		margin-top: 1rem;
-		color: #5bb4b2;
-		border: 2px solid;
-		background-color: rgba(255 255 255/ 40%);
-		cursor: pointer;
-	}
-</style>
+        &::before {
+          content: "✔";
+          margin-right: 0.5rem;
+        }
+      }
+    }
+    dl > div + div {
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid #ccc;
+    }
+    dt {
+      display: flex;
+      &::before {
+        content: "▶";
+        margin-right: 0.5rem;
+      }
+    }
+    dd {
+      display: flex;
+      margin-left: 2em;
+      &::before {
+        content: "✔";
+        margin-right: 0.5rem;
+      }
+    }
+    table {
+      border-collapse: collapse;
+    }
+    .cancel-poricy {
+      width: 100%;
+      th,
+      td {
+        padding: 0.25rem 0.5rem;
+        border: 1px solid #999;
+        background-color: rgb(255 255 255/ 40%);
+      }
+      th {
+        text-align: center;
+      }
+      td {
+        width: 50%;
+      }
+    }
+    .sns-list {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0;
+      > li {
+        > a {
+          display: block;
+        }
+        img {
+          width: 36px;
+        }
+      }
+    }
+    .time-table {
+      width: 100%;
+      th,
+      td {
+        padding: 0.25rem;
+        border: 1px solid #999;
+        background-color: rgb(255 255 255/ 40%);
+        text-align: center;
+      }
+      th {
+      }
+      td {
+        width: 50%;
+      }
+    }
+    .section--premium-seat {
+      h3 {
+        margin-top: 1.5rem;
+      }
+    }
+    .premiumSeat-button {
+      margin-top: 1rem;
+      color: #5bb4b2;
+      border: 2px solid;
+      background-color: rgba(255 255 255/ 40%);
+      cursor: pointer;
+    }
+  </style>
+</Layout>
