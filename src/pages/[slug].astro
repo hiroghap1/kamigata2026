@@ -1,6 +1,5 @@
 ---
-import { readFile } from 'fs/promises';
-import { parse } from 'csv-parse/sync';
+import Papa from 'papaparse';
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
@@ -56,21 +55,17 @@ interface CsvRecord {
 }
 
 export async function getStaticPaths() {
-  // CSVファイルを読み込む
-  const data = await readFile('src/data/store.csv', 'utf-8');
+  const url = `https://docs.google.com/spreadsheets/d/${import.meta.env.CONSIGNMENT_SPREADSHEET_ID}/export?format=csv&gid=${import.meta.env.CONSIGNMENT_SPREADSHEET_GID_STORE}`;
+  const res = await fetch(url);
+  const csvText = await res.text();
+  const { data: records } = Papa.parse<CsvRecord>(csvText, {
+    header: true,
+    skipEmptyLines: true,
+  });
 
-  // CSVをパースする（ヘッダー行をオブジェクトのキーとして使用）
-  const records = parse(data, {
-    columns: true,
-    skip_empty_lines: true
-  }) as CsvRecord[];
-
-  // console.log(records);
-
-  // 各レコードからパスを生成
   return records.map(record => ({
-    params: { slug: record.slug }, // slugフィールドがCSVに必要
-    props: { record } // レコード全体をpropsとして渡す
+    params: { slug: record.slug },
+    props: { record }
   }));
 }
 
