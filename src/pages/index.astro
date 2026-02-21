@@ -27,6 +27,11 @@ import ModalPremiumSeat from "../components/ModalPremiumSeat.astro";
 
 const newsItems = [
   {
+    date: "2026.02.21",
+    title: "プレミアムシートの予約フォームを公開しました",
+    link: "#premium-seat",
+  },
+  {
     date: "2026.02.20",
     title: "各店舗のお料理・お酒を公開しました",
     link: "#store",
@@ -190,13 +195,12 @@ const newsItems = [
             </ul>
           </section>
 
-          <section class="section section--premium-seat">
-            <h2 id="premium-seat" class="section-title">プレミアムシート</h2>
+          <section id="premium-seat" class="section section--premium-seat">
+            <h2 class="section-title">プレミアムシート</h2>
             <p class="text-center">
-              今年もあります。プレミアムシート！<br
-              />詳細はSNSをフォローしてお待ち下さい！
+              今年もあります。プレミアムシート！
             </p>
-            <ul class="sns-list">
+            <!-- <ul class="sns-list">
               <li>
                 <a href=`https://x.com/kamigatanihons1` target="_blank"
                   ><Image src={iconX} alt="X" /></a
@@ -207,7 +211,7 @@ const newsItems = [
                   ><Image src={iconInstagram} alt="Instagram" /></a
                 >
               </li>
-            </ul>
+            </ul> -->
             <img
               src={premiumSeat.src}
               alt="2024年のプレミアムシートの風景"
@@ -225,14 +229,14 @@ const newsItems = [
                   プレミアム体験として、蔵の方が自社の酒の魅力を語る特別トークを実施
                 </li>
                 <li>
-                  カンカン照りや雨など天候に左右されないテント内で、日本酒と料理を心ゆくまで堪能
+					雨やどんな天候でも左右されないテント内で、日本酒と料理を心ゆくまで堪能
                 </li>
               </ul>
 
               <!-- <p>昨年よりもさらに快適で特別感あふれる空間なこと間違いなし。<br>
 						プレミアムシートは席数限定！お早めにご予約ください！</p> -->
             </div>
-            <!-- <h3>◆詳細（必ずご注意事項までお読みください）</h3>
+            <h3>◆詳細（必ずご注意事項までお読みください）</h3>
             <div class="text-left">
               <table class="time-table">
                 <caption>⏳ 時間（100分制）</caption>
@@ -337,7 +341,7 @@ const newsItems = [
                   ご理解とご協力のほど、よろしくお願いいたします。<br />
                   何かご不明な点がございましたら、<a
                     href="mailto:juttoku.sake@gmail.com?subject=プレミアムシートについて"
-                    >juttoku.sake@gmail.com</a
+                    >info@kamigata-nihonshu.com</a
                   >までお気軽にご連絡ください。
                 </p>
 
@@ -357,13 +361,13 @@ const newsItems = [
                   >予約方法について詳しく見る</button
                 >
                 <p>
-                  ※クレジットカード以外の決済をご予約時にご利用いただきたい場合は4/17までに<a
-                    href="mailto:juttoku.sake@gmail.com?subject=プレミアムシートの決済方法について"
-                    >juttoku.sake@gmail.com</a
+                  ※クレジットカード以外の決済をご予約時にご利用いただきたい場合は3/19までに<a
+                    href="mailto:info@kamigata-nihonshu.com?subject=プレミアムシートの決済方法について"
+                    >info@kamigata-nihonshu.com</a
                   >にお問合せください。
                 </p>
               </table>
-            </div> -->
+            </div>
           </section>
           <!-- <section class="section" style="display: none">
 					<h2 class="section-title">Instagram</h2>
@@ -553,7 +557,7 @@ const newsItems = [
     width: 100%;
     max-width: 480px;
     margin-inline: auto;
-    padding-inline: 1rem;
+    // padding-inline: 1rem;
     grid-column: 1/2;
     grid-row: 1/2;
     grid-template-columns: 1fr;
