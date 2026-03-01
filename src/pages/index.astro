@@ -231,6 +231,9 @@ const newsItems = [
                 <li>
 					雨やどんな天候でも左右されないテント内で、日本酒と料理を心ゆくまで堪能
                 </li>
+                <li class="text-danger"><div>
+					<strong>プレミアムシートの料金に「イベント入場チケット代」は含まれておりません。</strong>プレミアムシートをご利用のお客様も、<strong>別途「入場チケット（前売1,000円/当日1,500円）」のご購入が必須</strong>となります。ご来場前に必ずチケットをご用意ください。
+        </div></li>
               </ul>
 
               <!-- <p>昨年よりもさらに快適で特別感あふれる空間なこと間違いなし。<br>
@@ -268,7 +271,7 @@ const newsItems = [
                 style="line-height: 1.2;margin-top: 1rem"
               >
                 <h4 class="price">100分 3,000円</h4>（ワンドリンクチケット付き）
-                <p style="margin-top: .5rem">※別途参加チケットが必要です</p>
+                <p class="text-danger" style="margin-top: .5rem">※別途参加チケットが必要です</p>
               </div>
 
               <h3>📌 注意事項</h3>
@@ -718,7 +721,10 @@ const newsItems = [
     margin-bottom: 3rem;
     > li {
       line-height: 1.4;
-      margin-top: 0.5rem;
+      >a {
+        display: block;
+        padding: .5rem 0;
+      }
     }
     > .new {
       position: relative;
@@ -728,7 +734,7 @@ const newsItems = [
         display: inline-block;
         width: 1.6em;
         height: 1.6em;
-        top: -0.1em;
+        top: 0.4em;
         left: -1.8em;
         background: url(/assets/images/new.svg) no-repeat center/contain;
       }
@@ -976,5 +982,8 @@ const newsItems = [
     border: 2px solid;
     background-color: rgba(255 255 255/ 40%);
     cursor: pointer;
+  }
+  .text-danger {
+    color: #e7000b;
   }
 </style>
